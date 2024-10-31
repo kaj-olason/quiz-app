@@ -18,6 +18,8 @@
     --secondary-border-color: #e0e0e0;
     --primary-box-shadow-color: 2px 2px 30px 0px #00000033;
     --secondary-box-shadow-color: 2px 2px 2px 0px #00000033;
+
+    --hover-color: #54C4F8;
 }
     
 /* Common Classes */
@@ -33,9 +35,12 @@ html {
 
 /* Baker */
 
+
 /* Henrik *
 
+
 /* Kaj */
+
 
 /* Viktor */
 
@@ -68,6 +73,7 @@ html {
     /* Kaj */
 
     /* Viktor */
+
 }
 
 @media (min-width: 1200px) {

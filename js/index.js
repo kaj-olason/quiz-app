@@ -1,33 +1,33 @@
 
-//let quizObject = readJsonFile("./json/quiz.json");
+//let quizObject = await readJsonFile("./json/quiz.json");
 
 let quizObject = {
     quizArray : [ 
         {
-            quizzName : "Djur Quiz",
-            questions : [
+            quizName : "Djur Quiz",
+            questionsArray : [
                 {
                     question : "Hur många ben har en myra?",
                     answers : ["4st", "6st", "8st", "10st"],
                     correctIndexAnswer : 1
                 },
                 {
-                    question : "En zebra är",
+                    question : "En zebra är...",
                     answers : ["rutig", "grön", "randig", "blå"],
                     correctIndexAnswer : 2
                 }
             ]
         },
         {
-            quizzName : "Data Quiz",
-            questions : [
+            quizName : "Data Quiz",
+            questionsArray : [
                 {
                     question : "Vilken av följande är ett programmeringsspråk?",
-                    answers : ["Hamburger", "Coffe", "Whiskey", "Java"],
+                    answers : ["Hamburger", "Coffee", "Whiskey", "Java"],
                     correctIndexAnswer : 3
                 },
                 {
-                    question : "Vad står MB för",
+                    question : "Vad står MB för?",
                     answers : ["Mera Byte", "Många Byte", "Mega Byte", "Multi Byte"],
                     correctIndexAnswer : 0
                 }
