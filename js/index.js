@@ -45,17 +45,17 @@ let currentQuiz = quizObject.quizArray[0]; // 0 = Djur Quiz, 1 = Data Quiz
 let currentAnswers = [];
 
 
-    /* Baker */
+/* Baker */
 
 
 
-    /* Henrik *
+/* Henrik *
 
 
 
-    /* Kaj */
+/* Kaj */
 
 
     
-    /* Viktor */
+/* Viktor */
 
