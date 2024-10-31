@@ -1,3 +1,6 @@
+quizSelectElement = document.getElementById("quiz-select");
+quizRunElement = document.getElementById("quiz-run");
+quizResultElement = document.getElementById("quiz-result");
 
 //let quizObject = await readJsonFile("./json/quiz.json");
 
