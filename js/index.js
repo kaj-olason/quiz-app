@@ -1,3 +1,5 @@
+debugger;
+
 quizSelectElement = document.getElementById("quiz-select");
 quizRunElement = document.getElementById("quiz-run");
 quizResultElement = document.getElementById("quiz-result");
