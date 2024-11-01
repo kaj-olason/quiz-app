@@ -1,0 +1,89 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Fonts*/
+    --primary-font: "Poppins", sans-serif;
+    --secondary-font: "DM Sans", sans-serif;
+
+    --primary-color: #000000;
+    --secondary-color: #5a5858;
+    --primary-background-color: #FFFFFF;
+    --secondary-background-color: #F5F5F5;
+
+    --primary-border-color: #a09d9d;
+    --secondary-border-color: #e0e0e0;
+    --primary-box-shadow-color: 2px 2px 30px 0px #00000033;
+    --secondary-box-shadow-color: 2px 2px 2px 0px #00000033;
+
+    --hover-color: #54C4F8;
+}
+    
+/* Common Classes */
+.collapsed {
+    display: none;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: var(--primary-font);
+}
+
+
+/* Baker */
+
+
+/* Henrik *
+
+
+/* Kaj */
+
+
+/* Viktor */
+
+
+
+
+@media (min-width: 768px) {
+    html {
+        font-size: 1.5*62.5%;
+    }
+    /* Baker */
+
+    /* Henrik *
+
+    /* Kaj */
+
+    /* Viktor */
+
+}
+
+@media (min-width: 1024px) {
+    html {
+        font-size: 2*62.5%;
+    }
+
+    /* Baker */
+
+    /* Henrik *
+
+    /* Kaj */
+
+    /* Viktor */
+
+}
+
+@media (min-width: 1200px) {
+
+    /* Baker */
+
+    /* Henrik *
+
+    /* Kaj */
+
+    /* Viktor */
+
+}
