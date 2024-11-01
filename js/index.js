@@ -59,3 +59,45 @@ let currentAnswers = [];
     
 /* Viktor */
 
+// const quizTimer = document.getElementById("quizTimer");
+
+// const startButton document.getElementById("idStartBtn");
+
+// startButton.addEventListener("click", startTimer);
+
+let timerCount = 0;
+
+let timerInterval;
+
+function startTimer() {
+    
+    // A Condition which prevents a new interval to be started if an interval is already ongoing
+    
+    if (!timerInterval) {
+        timerInterval = setInterval(updateTimer, 1000);    
+    }
+}
+
+function updateTimer() {
+
+    timerCount += 1;
+    quizTimer.innerHTML = timerCount;
+
+    if (timerCount === 10) {
+        pauseTimer();
+    }
+}
+
+function pauseTimer() {
+    
+    clearInterval(timerInterval);
+
+    timerInterval = null; 
+}
+
+function resetTimer() {
+    
+    timerCount = 0;
+    quizTimer.innerHTML = timerCount;
+}
+
