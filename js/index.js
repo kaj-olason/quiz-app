@@ -10,6 +10,7 @@ let quizObject = {
     quizArray : [ 
         {
             quizName : "Djur Quiz",
+            timeLimitSec : 30,
             questionsArray : [
                 {
                     question : "Hur många ben har en myra?",
@@ -25,6 +26,7 @@ let quizObject = {
         },
         {
             quizName : "Data Quiz",
+            timeLimitSec : 30,
             questionsArray : [
                 {
                     question : "Vilken av följande är ett programmeringsspråk?",
@@ -65,14 +67,13 @@ let currentAnswers = [];
 
 // startButton.addEventListener("click", startTimer);
 
-let timerCount = 0;
+let timerCountSec = 0;
 
 let timerInterval;
 
 function startTimer() {
     
     // A Condition which prevents a new interval to be started if an interval is already ongoing
-    
     if (!timerInterval) {
         timerInterval = setInterval(updateTimer, 1000);    
     }
@@ -80,24 +81,28 @@ function startTimer() {
 
 function updateTimer() {
 
-    timerCount += 1;
-    quizTimer.innerHTML = timerCount;
-
-    if (timerCount === 10) {
-        pauseTimer();
+    timerCountSec += 1;
+    
+    if (timerCountSec < 10) {
+        quizTimer.innerHTML = "0" + timerCountSec;
+    } else {
+        quizTimer.innerHTML = timerCountSec;
+    }      
+    
+    if (timerCountSec === currentQuiz.timeLimitSec) {
+        pauseTimer()
     }
 }
 
 function pauseTimer() {
     
     clearInterval(timerInterval);
-
     timerInterval = null; 
 }
 
 function resetTimer() {
     
-    timerCount = 0;
-    quizTimer.innerHTML = timerCount;
+    timerCountSec = 0;
+    quizTimer.innerHTML = "0" + timerCountSec;
 }
 
