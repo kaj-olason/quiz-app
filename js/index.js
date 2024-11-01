@@ -101,6 +101,9 @@ function pauseTimer() {
 }
 
 function resetTimer() {
+
+    clearInterval(timerInterval);
+    timerInterval = null;
     
     timerCountSec = 0;
     quizTimer.innerHTML = "0" + timerCountSec;
