@@ -4,7 +4,7 @@ if (localStorage.getItem("quizObject")) {
   quizObject = JSON.parse(localStorage.getItem("quizObject"));
 } else {
   // Fetsh data from json-file if data not exist in local storage
-  const response = await fetch("../quizdata.json");
+  const response = await fetch("./quizdata.json");
   quizObject = await response.json();
 
   // Store the quiz-object into local-storage
@@ -15,7 +15,7 @@ const quizSelectElement = document.getElementById("quiz-select-id");
 const quizRunElement = document.getElementById("quiz-run");
 const quizResultElement = document.getElementById("quiz-result");
 
-let currentQuiz = quizObject[0]; // 0 = Djur Quiz, 1 = Data Quiz
+let currentQuiz = {};
 let currentAnswers = [];
 
 /* Baker */
@@ -46,7 +46,7 @@ function loadQuizzes(elementObj, classNames) {
 }
 
 function selectQuiz(quiz) {
-  currentQuiz = quizObject.quizArray[quiz.dataset.id];
+  currentQuiz = quizObject[quiz.dataset.id];
   quizSelectElement.classList.add("collapsed");
   quizRunElement.classList.remove("collapsed");
 
