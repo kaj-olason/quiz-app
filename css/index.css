@@ -1,9 +1,15 @@
 *,
 *::before,
 *::after {
+<<<<<<< HEAD
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+=======
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+>>>>>>> 9094571 (Pretty formatted html, css & js)
 }
 
 :root {
@@ -87,7 +93,7 @@ html {
 }
 
 .quiz-list {
-    width : 100%;
+    width: 100%;
     height: 100%;
     overflow-x: hidden;
     border: 2px solid var(--primary-border-color);
@@ -100,9 +106,12 @@ html {
     cursor: default;
     text-align: center;
 
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .quiz-list-item:nth-of-type(odd) {
@@ -132,10 +141,18 @@ html {
 /* Viktor */
 
 @media (min-width: 768px) {
+<<<<<<< HEAD
   html {
     font-size: 1.5 * 62.5%;
   }
   /* Baker */
+=======
+    html {
+        font-size: 1.5*62.5%;
+    }
+
+    /* Baker */
+>>>>>>> 9094571 (Pretty formatted html, css & js)
 
     /* Henrik */
 
@@ -161,7 +178,7 @@ html {
         width: 80vw;
         height: 20rem;
         border: 2px solid var(--primary-border-color);
-    
+
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -185,10 +202,13 @@ html {
         scroll-behavior: smooth;
         flex-shrink: 0;
         z-index: 0;
-        
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */
+
+        -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* IE 10 and IE 11 */
+        user-select: none;
+        /* Standard syntax */
 
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
