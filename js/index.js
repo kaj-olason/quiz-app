@@ -1,17 +1,17 @@
-// Import the quiz-object from json-file
 import quizDataJson from "../quizdata.json" with { type: "json" };
 
-// Store the quiz-object into local-storage
-localStorage.setItem("quizData", JSON.stringify(quizDataJson));
+let quizData = {};
 
-const quizData = JSON.parse(localStorage.getItem("quizData"));
-
+if (localStorage.getItem("quizData")) {
+  quizData = JSON.parse(localStorage.getItem("quizData"));
+} else {
+  // Store the quiz-object into local-storage
+  localStorage.setItem("quizData", JSON.stringify(quizDataJson));
+}
 
 const quizSelectElement = document.getElementById("quiz-select");
 const quizRunElement = document.getElementById("quiz-run");
 const quizResultElement = document.getElementById("quiz-result");
-
-
 
 console.log(quizData);
 
