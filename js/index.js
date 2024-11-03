@@ -81,8 +81,9 @@ function startTimer() {
 
 function updateTimer() {
 
-    timerCountSec += 1;
+    timerCountSec++;
     
+    //Made a condition to make timer start at 00 instead of 0
     if (timerCountSec < 10) {
         quizTimer.innerHTML = "0" + timerCountSec;
     } else {
