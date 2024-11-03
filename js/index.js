@@ -51,7 +51,7 @@ function selectQuiz(quiz) {
   quizRunElement.classList.remove("collapsed");
 
   console.log(`Quiz ${quiz.dataset.id} selected`);
-  // loadQuiz();
+  // loadQuiz(currentQuiz);
 }
 
 /* Media query handler */
