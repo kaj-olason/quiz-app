@@ -1,15 +1,9 @@
 *,
 *::before,
 *::after {
-<<<<<<< HEAD
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-=======
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
->>>>>>> 9094571 (Pretty formatted html, css & js)
 }
 
 :root {
@@ -141,18 +135,11 @@ html {
 /* Viktor */
 
 @media (min-width: 768px) {
-<<<<<<< HEAD
-  html {
-    font-size: 1.5 * 62.5%;
-  }
-  /* Baker */
-=======
     html {
         font-size: 1.5*62.5%;
     }
 
     /* Baker */
->>>>>>> 9094571 (Pretty formatted html, css & js)
 
     /* Henrik */
 
