@@ -34,15 +34,15 @@ loadQuizzes(quizSliderElement, "quiz-slider-item");
 mediaQueryEventHandler();
 
 function loadQuizzes(elementObj, classNames) {
-  for (let i = 0; i < quizObject.quizArray.length; i++) {
-    const quiz = quizObject.quizArray[i];
+  let i=0;
+  quizObject.forEach((quiz) => {
     const quizElement = document.createElement("p");
-    quizElement.dataset.id = i;
+    quizElement.dataset.id = i++;
     quizElement.classList.add(classNames);
     quizElement.addEventListener("click", (e) => selectQuiz(quizElement));
     quizElement.innerHTML = quiz.quizName;
     elementObj.appendChild(quizElement);
-  }
+  });
 }
 
 function selectQuiz(quiz) {
