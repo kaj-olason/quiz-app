@@ -41,7 +41,9 @@ function loadQuizzes() {
 
 function selectQuiz(quiz) {
     currentQuiz = quizObject.quizArray[quiz.dataset.id];
-    console.log("currentQuiz", currentQuiz, quiz.dataset.id);
+    quizSelectElement.classList.add("collapsed");
+    quizRunElement.classList.remove("collapsed");
+    
     // loadQuiz();
 }
 
