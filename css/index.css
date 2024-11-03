@@ -78,20 +78,26 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
     width: 80rem;
     max-width: 90vw;
     min-width: 280px;
+    height: 70svh;
     max-height: 80svh;
-    border: 2px solid var(--primary-border-color);
-    overflow-x: hidden;
 }
 
+.quiz-list {
+    width : 100%;
+    height: 100%;
+    overflow-x: hidden;
+    border: 2px solid var(--primary-border-color);
+}
 
-.quiz-select-item {
+.quiz-list-item {
     font-size: 3rem;
     font-weight: 700;
     color: var(--primary-color);
-    cursor: pointer;
+    cursor: default;
     text-align: center;
 
     -webkit-user-select: none; /* Safari */
@@ -99,11 +105,11 @@ html {
     user-select: none; /* Standard syntax */
 }
 
-.quiz-select-item:nth-of-type(odd) {
+.quiz-list-item:nth-of-type(odd) {
     background-color: var(--secondary-background-color);
 }
 
-.quiz-select-item:hover {
+.quiz-list-item:hover {
     background-color: var(--hover-color);
 }
 
@@ -146,6 +152,58 @@ html {
   /* Baker */
 
     /* Henrik */
+
+    .quiz-slider {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        height: 20rem;
+        border: 2px solid var(--primary-border-color);
+    
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+    }
+
+    .quiz-slider-item {
+        font-size: 1rem;
+        font-weight: 700;
+        text-wrap: nowrap;
+        text-align: center;
+        width: 60%;
+        color: var(--primary-color);
+        background-color: rgba(0, 0, 0, 0);
+        cursor: default;
+        scroll-snap-align: center;
+        scroll-behavior: smooth;
+        flex-shrink: 0;
+        z-index: 0;
+        
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .quiz-slider-item:first-of-type {
+        font-size: 8rem;
+        color: var(--hover-color);
+        cursor: pointer;
+        margin-left: 25%;
+    }
+
+    .quiz-slider-item:last-child {
+        margin-inline-end: 47%;
+    }
 
     /* Kaj */
 
