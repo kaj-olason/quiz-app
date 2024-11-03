@@ -36,7 +36,89 @@ html {
 
 /* Baker */
 
-/* Henrik *
+
+/* Henrik */
+
+/* Header */
+
+.nav-bar {
+    width: 100vw;
+    max-width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--primary-background-color);
+    border-bottom: 1px solid var(--primary-border-color);
+    z-index: 1;
+}
+
+.heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+}
+
+/* Select list */
+
+.quiz-select {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80rem;
+    max-width: 90vw;
+    min-width: 280px;
+    max-height: 80svh;
+    border: 2px solid var(--primary-border-color);
+    overflow-x: hidden;
+}
+
+
+.quiz-select-item {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    cursor: pointer;
+    text-align: center;
+
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.quiz-select-item:nth-of-type(odd) {
+    background-color: var(--secondary-background-color);
+}
+
+.quiz-select-item:hover {
+    background-color: var(--hover-color);
+}
+
+
+/* Footer */
+
+.footer {
+    width: 100vw;
+    max-width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 0.5rem 0;
+}
 
 
 /* Kaj */
@@ -49,7 +131,7 @@ html {
   }
   /* Baker */
 
-  /* Henrik *
+    /* Henrik */
 
     /* Kaj */
 
@@ -63,7 +145,7 @@ html {
 
   /* Baker */
 
-  /* Henrik *
+    /* Henrik */
 
     /* Kaj */
 
@@ -73,7 +155,7 @@ html {
 @media (min-width: 1200px) {
   /* Baker */
 
-  /* Henrik *
+    /* Henrik */
 
     /* Kaj */
 

@@ -20,7 +20,31 @@ let currentAnswers = [];
 
 /* Baker */
 
-/* Henrik *
+
+
+/* Henrik */
+
+loadQuizzes();
+
+function loadQuizzes() {
+    for(let i=0; i<quizObject.quizArray.length; i++) {
+        const quiz = quizObject.quizArray[i];
+        const quizName = quiz.quizName;
+        const quizElement = document.createElement("p");
+        quizElement.dataset.id = i;
+        quizElement.classList.add("quiz-select-item");
+        quizElement.addEventListener("click", (e) => selectQuiz(quizElement));
+        quizElement.innerHTML = quiz.quizName;
+        quizSelectElement.appendChild(quizElement);
+    }
+}
+
+function selectQuiz(quiz) {
+    currentQuiz = quizObject.quizArray[quiz.dataset.id];
+    console.log("currentQuiz", currentQuiz, quiz.dataset.id);
+    // loadQuiz();
+}
+
 
 
 

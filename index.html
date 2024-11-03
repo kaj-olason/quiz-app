@@ -26,11 +26,19 @@
   </head>
   <body>
     <header>
-      <!-- Henrik (Header) -->
+        <nav class="nav-bar">
+            <p class="heading">Quiz</p>
+            <label id="hamburger-menu" class="hamburger-menu">
+                <img class="icon__display--hamburger icon__size--hamburger icon__position--hamburger"
+                    src="./svg/hamburger-menu.svg" alt="Hamburger Menu Icon">
+            </label>
+        </nav>
     </header>
     <main>
-      <!-- Henrik (Select Quiz) -->
-      <div id="quiz-select" class="collapsed"></div>
+
+        <!-- Henrik (Select Quiz) -->
+        <div id="quiz-select" class="quiz-select">
+        </div>
 
       <!-- Kaj (Run Quiz) -->
       <div id="quiz-run" class="collapsed"></div>
@@ -38,8 +46,8 @@
       <!-- Baker (Quiz Result) -->
       <div id="quiz-result" class="collapsed"></div>
     </main>
-    <footer>
-      <!-- Henrik (Footer) -->
+    <footer class="footer">
+        <p>Copyright &copy; 2024</p>
     </footer>
     <script type="module" src="./js/index.js"></script>
   </body>
