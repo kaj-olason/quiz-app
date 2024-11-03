@@ -4,7 +4,7 @@ if (localStorage.getItem("quizObject")) {
   quizObject = JSON.parse(localStorage.getItem("quizObject"));
 } else {
   // Fetsh data from json-file if data not exist in local storage
-  const response = await fetch("./quizdata.json");
+  const response = await fetch("../quizdata.json");
   quizObject = await response.json();
 
   // Store the quiz-object into local-storage
