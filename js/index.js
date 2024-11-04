@@ -26,12 +26,18 @@ let currentAnswers = [];
 
 const hamburgerMenuElement = document.getElementById("hamburger-menu-id");
 
-hamburgerMenuElement.addEventListener("click", (e) => hamburgerMenuEventHandler(e));
-
-function hamburgerMenuEventHandler(e) {
+hamburgerMenuElement.addEventListener("click", (e) => {
   const navMenuElement = document.getElementById("nav-menu-id");
   navMenuElement.classList.toggle("nav-menu-collapsed");
-}
+});
+
+/* About Menu */
+
+const aboutMenuElement = document.getElementById("nav-menu-about-id");
+
+aboutMenuElement.addEventListener("click", (e) => {
+  alert("Quiz 1.0\n\nBy Baker, Henrik, Kaj & Viktor");
+});
 
 /* Load function */
 
