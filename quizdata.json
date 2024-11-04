@@ -28,5 +28,20 @@
         "correctIndexAnswer": 0
       }
     ]
+  },
+  {
+    "quizName": "Geografi Quiz",
+    "questionsArray": [
+      {
+        "question": "I vilken världsdel ligger Sverige?",
+        "answers": ["Asien", "Sydamerika", "Europa", "Australien"],
+        "correctIndexAnswer": 2
+      },
+      {
+        "question": "Vad heter Sveriges huvudstad?",
+        "answers": ["Stockholm", "Skövde", "Göteborg", "Halmstad"],
+        "correctIndexAnswer": 0
+      }
+    ]
   }
 ]
