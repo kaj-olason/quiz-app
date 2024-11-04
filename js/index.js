@@ -126,9 +126,6 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
     quizSliderItemsElement[i].style.color = "#000000";
     quizSliderItemsElement[i].style.zIndex = "0";
     quizSliderItemsElement[i].style.cursor = "default";
-    quizSliderItemsElement[i].removeEventListener("click", (e) =>
-      SliderQuiz(e.target)
-    );
   }
 
   quizSliderItemsElement[indexLeft].style.fontSize = `${leftFontSize}rem`;
@@ -137,9 +134,6 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
   quizSliderItemsElement[indexInFocus].style.cursor = "pointer";
   quizSliderItemsElement[indexInFocus].style.color = "#54C4F8";
   quizSliderItemsElement[indexInFocus].style.zIndex = "1";
-  quizSliderItemsElement[indexInFocus].addEventListener("click", (e) =>
-    selectQuiz(e.target)
-  );
 }
 
 /* Kaj */
