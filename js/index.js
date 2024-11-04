@@ -3,7 +3,7 @@ let quizObject = {};
 if (localStorage.getItem("quizObject")) {
   quizObject = JSON.parse(localStorage.getItem("quizObject"));
 } else {
-  // Fetsh data from json-file if data not exist in local storage
+  // Fetch data from json-file if data not exist in local storage
   const response = await fetch("../quizdata.json");
   quizObject = await response.json();
 
@@ -22,12 +22,23 @@ let currentAnswers = [];
 
 /* Henrik */
 
+/* Hamburger Menu */
+
+const hamburgerMenuElement = document.getElementById("hamburger-menu-id");
+
+hamburgerMenuElement.addEventListener("click", (e) => hamburgerMenuEventHandler(e));
+
+function hamburgerMenuEventHandler(e) {
+  const navMenuElement = document.getElementById("nav-menu-id");
+  navMenuElement.classList.toggle("nav-menu-collapsed");
+}
+
+/* Load function */
+
 const quizListElement = document.getElementById("quiz-list-id");
 const quizSliderElement = document.getElementById("quiz-slider-id");
 quizListElement.classList.add("collapsed");
 quizSliderElement.classList.add("collapsed");
-
-/* Load function */
 
 loadQuizzes(quizListElement, "quiz-list-item");
 loadQuizzes(quizSliderElement, "quiz-slider-item");
