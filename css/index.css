@@ -105,6 +105,13 @@ html {
   display: none;
 }
 
+.welcome-msg {
+  position: absolute;
+  left: 20%;
+  top: 30%;
+  margin-left: auto;
+}
+
 /* Select list */
 
 .quiz-select {
