@@ -60,7 +60,7 @@ html {
     height: 4rem;
     display: flex;
     align-items: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--primary-color);
 }
@@ -95,7 +95,7 @@ html {
 .hamburger-menu {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     width: 4rem;
     height: 4rem;
     cursor: pointer;
@@ -170,24 +170,10 @@ html {
 
 @media (min-width: 768px) {
     html {
-        font-size: 1.5*62.5%;
+        font-size: calc(1.25 * 62.5%);
     }
 
     /* Baker */
-
-    /* Henrik */
-
-    /* Kaj */
-
-  /* Viktor */
-}
-
-@media (min-width: 1024px) {
-  html {
-    font-size: 2 * 62.5%;
-  }
-
-  /* Baker */
 
     /* Henrik */
 
@@ -208,6 +194,20 @@ html {
       flex: 1;
       display: inline-block;
     }
+    
+    /* Kaj */
+
+    /* Viktor */
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: calc(1.5 * 62.5%);
+  }
+
+    /* Baker */
+
+    /* Henrik */
 
     .quiz-slider {
         position: absolute;
@@ -233,7 +233,7 @@ html {
         font-weight: 700;
         text-wrap: nowrap;
         text-align: center;
-        width: 60%;
+        width: 50%;
         color: var(--primary-color);
         background-color: rgba(0, 0, 0, 0);
         cursor: default;
@@ -254,7 +254,7 @@ html {
     }
 
     .quiz-slider-item:first-of-type {
-        font-size: 8rem;
+        font-size: 6rem;
         color: var(--hover-color);
         cursor: pointer;
         margin-left: 25%;
