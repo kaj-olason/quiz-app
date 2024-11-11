@@ -143,6 +143,35 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 
 /* Viktor */
 
+const popupContainer = document.getElementById("popup-container-id");
+const inputName = document.getElementById("input-name-id");
+const submitBtn = document.getElementById("submit-btn-id");
+const anonymousBtn = document.getElementById("anonymous-btn-id");
+
+if (!localStorage.getItem("playerName")) {
+  
+  popupContainer.classList.toggle("collapsed");
+
+  submitBtn.addEventListener("click", () => {
+      
+      if (inputName.value === "") {
+
+        alert("Please enter a name");
+      
+      } else {
+
+          localStorage.setItem("playerName", inputName.value);
+          popupContainer.classList.toggle("collapsed");
+        }
+    });
+
+    anonymousBtn.addEventListener("click", () => {
+
+      popupContainer.classList.toggle("collapsed");
+    
+    })
+}
+
 // const quizTimer = document.getElementById("quizTimer");
 
 // const startButton document.getElementById("idStartBtn");
