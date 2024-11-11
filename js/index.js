@@ -167,7 +167,7 @@ if (!localStorage.getItem("playerName")) {
           popupContainer.classList.toggle("collapsed");
           const playerName = localStorage.getItem("playerName");
 
-          welcomeMsg.innerText = `Welcome, ${playerName}. Select a quiz and start playing!` 
+          welcomeMsg.innerText = `Welcome, ${playerName}! Select a quiz and start playing!` 
 
         }
     });
@@ -176,16 +176,14 @@ if (!localStorage.getItem("playerName")) {
 
       popupContainer.classList.toggle("collapsed");
 
-      welcomeMsg.innerText = `Welcome, select a quiz and start playing!`
+      welcomeMsg.innerText = `Welcome! select a quiz and start playing!`
     
     })
 
 } else {
     const playerName = localStorage.getItem("playerName");
-    welcomeMsg.innerText = `Welcome back, ${playerName}. You know the drill, get ready!`
+    welcomeMsg.innerText = `Welcome back, ${playerName}! You know the drill, get ready!`
 }
-
-localStorage.removeItem("playerName");
 
 // const quizTimer = document.getElementById("quizTimer");
 

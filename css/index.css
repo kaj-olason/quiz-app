@@ -106,10 +106,9 @@ html {
 }
 
 .welcome-msg {
-  position: absolute;
-  left: 20%;
-  top: 30%;
-  margin-left: auto;
+  width: fit-content;
+  margin: 2rem auto 0 auto;
+  font-size: 1.5rem;
 }
 
 /* Select list */
