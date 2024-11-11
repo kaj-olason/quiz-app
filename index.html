@@ -24,39 +24,38 @@
 </head>
 
 <body>
-  <header>
-    <nav class="nav-bar">
-      <p class="heading">Quiz</p>
-      <ul id="nav-menu-id" class="nav-menu">
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="#">Menu2</a></li>
-        <li><a href="#">Menu3</a></li>
-        <li><a id="nav-menu-about-id">About</a></li>
-      </ul>
-      <label id="hamburger-menu-id" class="hamburger-menu">
-        <img class="icon__display--hamburger icon__size--hamburger icon__position--hamburger"
-          src="./svg/hamburger-menu.svg" alt="Hamburger Menu Icon">
-      </label>
-    </nav>
-  </header>
-  <main>
+    <header>
+      <nav class="nav-bar">
+        <p class="heading">Quiz</p>
+        <ul id="nav-menu-id" class="nav-menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="#">Menu2</a></li>
+          <li><a href="#">Menu3</a></li>
+          <li><a id="nav-menu-about-id">About</a></li>
+        </ul>
+        <label id="hamburger-menu-id" class="hamburger-menu">
+          <img class="icon__display--hamburger icon__size--hamburger icon__position--hamburger"
+            src="./svg/hamburger-menu.svg" alt="Hamburger Menu Icon">
+        </label>
+      </nav>
+    </header>
+    <main>
+      <!-- Henrik (Select Quiz) -->
+      <div id="quiz-select-id" class="quiz-select">
+        <div id="quiz-list-id" class="quiz-list collapsed"></div>
+        <div id="quiz-slider-id" class="quiz-slider collapsed"></div>
+      </div>
 
-    <!-- Henrik (Select Quiz) -->
-    <div id="quiz-select-id" class="quiz-select">
-      <div id="quiz-list-id" class="quiz-list collapsed"></div>
-      <div id="quiz-slider-id" class="quiz-slider collapsed"></div>
-    </div>
+      <!-- Kaj (Run Quiz) -->
+      <div id="quiz-run" class="collapsed"></div>
 
-    <!-- Kaj (Run Quiz) -->
-    <div id="quiz-run" class="collapsed"></div>
-
-    <!-- Baker (Quiz Result) -->
-    <div id="quiz-result" class="collapsed"></div>
-  </main>
-  <footer class="footer">
-    <p>Copyright &copy; 2024</p>
-  </footer>
-  <script type="module" src="./js/index.js"></script>
+      <!-- Baker (Quiz Result) -->
+      <div id="quiz-result" class="collapsed"></div>
+    </main>
+    <footer class="footer">
+      <p>Copyright &copy; 2024</p>
+    </footer>
+    <script type="module" src="./js/index.js"></script>
 </body>
 
 </html>
