@@ -11,6 +11,11 @@
         "question": "En zebra är...",
         "answers": ["rutig", "grön", "randig", "blå"],
         "correctIndexAnswer": 2
+      },
+      {
+        "question": "En haj är..?",
+        "answers": ["snäll", "försiktig", "farlig", "omtämksam"],
+        "correctIndexAnswer": 2
       }
     ]
   },

@@ -66,9 +66,7 @@ function selectQuiz(quiz) {
   currentQuiz = quizObject[quiz.dataset.id];
   quizSelectElement.classList.add("collapsed");
   quizRunElement.classList.remove("collapsed");
-
-  console.log(`Quiz ${quiz.dataset.id} selected`);
-  // loadQuiz(currentQuiz);
+  loadQuiz(currentQuiz);
 }
 
 /* Media query handler */
@@ -137,6 +135,201 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 }
 
 /* Kaj */
+function loadQuiz(quizObject) {
+  // Form
+  let form = document.getElementById("quiz-form");
+  form.classList.add("quiz-form");
+
+  // Title
+  const title = document.createElement("p");
+  title.innerHTML = `Du har valt quiz med temat <span class="quiz-title-theme">${quizObject.quizName}</span>`;
+  title.classList.add("quiz-title");
+  form.appendChild(title);
+
+  // Question Container
+  const questionContainer = document.createElement("div");
+  questionContainer.classList.add("questionContainer");
+  form.appendChild(questionContainer);
+
+  //Error
+  let error = document.createElement("p");
+  let errorMessage = document.createTextNode("Du behöver göra ett val!");
+  error.appendChild(errorMessage);
+  error.classList.add("error");
+  form.appendChild(error);
+
+  //Buttons
+  let btnNext = document.getElementById("btnNext");
+
+  let answareBtn = document.createElement("BUTTON");
+  let answareBtnText = document.createTextNode("Se resultat");
+  let buttonContainer = document.getElementById("btnContainer");
+  answareBtn.appendChild(answareBtnText);
+  answareBtn.classList.add("answareBtn");
+  buttonContainer.appendChild(answareBtn);
+
+  let currentIndex = 0;
+  let quizResult = 0;
+
+  let maxIndex = quizObject.questionsArray.length - 1;
+  let maxPoint = quizObject.questionsArray.length;
+
+  let quizResultObject = {
+    playerName: "",
+    quizTheme: quizObject.quizName,
+    quizResult: [],
+    maxPoint: maxPoint,
+    yourPoint: 0,
+  };
+
+  btnNext.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    let obj = {
+      quistion: "",
+      correctAnsware: "",
+      yourAnsware: "",
+    };
+
+    let checkRadio = document.querySelector(
+      `input[name="${currentIndex}"]:checked`
+    );
+
+    if (checkRadio !== null) {
+      let correctAnswareIndex =
+        quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+      obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+      error.classList.remove("errorShow");
+
+      let inputs = document.querySelectorAll("input[type='radio']");
+      inputs.forEach(function (h) {
+        if (h.name == currentIndex && h.id == correctAnswareIndex) {
+          obj.correctAnsware = h.value;
+        }
+      });
+
+      let checked = document.querySelectorAll("input[type='radio']:checked");
+      checked.forEach(function (cb) {
+        obj.yourAnsware = cb.value;
+
+        if (cb.id == correctAnswareIndex) {
+          ++quizResult;
+        }
+      });
+      quizResultObject.quizResult.push(obj);
+      console.log(quizResultObject);
+      currentIndex = ++currentIndex;
+      questionContainer.style.left = "-" + currentIndex * 800 + "px";
+    } else {
+      error.classList.add("errorShow");
+    }
+
+    if (currentIndex >= maxIndex) {
+      btnNext.style.display = "none";
+      answareBtn.style.display = "inline-block";
+      answareBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        let obj = {
+          quistion: "",
+          correctAnsware: "",
+          yourAnsware: "",
+        };
+
+        console.log("Your result: ", quizResult);
+        console.log("Current index: ", currentIndex);
+
+        let checkRadio = document.querySelector(
+          `input[name="${currentIndex}"]:checked`
+        );
+        if (checkRadio !== null) {
+          let correctAnswareIndex =
+            quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+          console.log(quizObject);
+          console.log(currentIndex);
+          console.log(obj);
+          obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+          error.classList.remove("errorShow");
+
+          let inputs = document.querySelectorAll("input[type='radio']");
+          inputs.forEach(function (h) {
+            if (h.name == currentIndex && h.id == correctAnswareIndex) {
+              obj.correctAnsware = h.value;
+            }
+          });
+
+          let checked = document.querySelectorAll(
+            "input[type='radio']:checked"
+          );
+          checked.forEach(function (cb) {
+            obj.yourAnsware = cb.value;
+
+            if (cb.id == correctAnswareIndex) {
+              ++quizResult;
+            }
+          });
+          quizResultObject.quizResult.push(obj);
+          quizResultObject.yourPoint = quizResult;
+          console.log(quizResultObject);
+          showResult(quizResultObject);
+        } else {
+          error.classList.add("errorShow");
+        }
+      });
+    } else {
+      btnNext.style.display = "inline-block";
+      answareBtn.style.display = "none";
+    }
+  });
+
+  currentQuiz.questionsArray.forEach((quizItem, questionIndex) => {
+    //Fieldset
+    const fieldset = document.createElement("fieldset");
+    fieldset.classList.add("quizFieldset");
+    questionContainer.appendChild(fieldset);
+
+    //The Quiestion text
+    const questionNode = document.createElement("p");
+    const questionText = document.createTextNode(quizItem.question);
+    questionNode.appendChild(questionText);
+    fieldset.appendChild(questionNode);
+
+    //Inputs
+    const inputs = document.createElement("div");
+    inputs.classList.add("inputs");
+    fieldset.appendChild(inputs);
+
+    quizItem.answers.forEach((quizAnsware, answareIndex) => {
+      //Input Container
+      const inputContainer = document.createElement("div");
+      inputContainer.classList.add("inputContainer");
+      inputs.appendChild(inputContainer);
+
+      //Input
+      const input = document.createElement("INPUT");
+      input.type = "radio";
+      input.id = answareIndex;
+      input.name = questionIndex;
+      input.value = quizAnsware;
+      inputContainer.appendChild(input);
+
+      //Label
+      const label = document.createElement("Label");
+      label.htmlFor = questionIndex;
+      label.innerHTML = quizAnsware;
+      label.classList.add("label");
+      inputContainer.appendChild(label);
+    });
+  });
+}
+
+const showResult = (resultObject) => {
+  console.log(resultObject);
+};
 
 /* Viktor */
 
@@ -184,4 +377,3 @@ function resetTimer() {
   timerCountSec = 0;
   quizTimer.innerHTML = "0" + timerCountSec;
 }
-
