@@ -59,6 +59,12 @@ html {
   height: 4rem;
   display: flex;
   align-items: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  height: 4rem;
+  display: flex;
+  align-items: center;
   font-size: 2rem;
   font-weight: 700;
   color: var(--primary-color);
@@ -94,7 +100,7 @@ html {
 .hamburger-menu {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   width: 4rem;
   height: 4rem;
   cursor: pointer;
@@ -240,21 +246,7 @@ html {
 
 @media (min-width: 768px) {
   html {
-    font-size: 1.5 * 62.5%;
-  }
-
-  /* Baker */
-
-  /* Henrik */
-
-  /* Kaj */
-
-  /* Viktor */
-}
-
-@media (min-width: 1024px) {
-  html {
-    font-size: 2 * 62.5%;
+    font-size: calc(1.25 * 62.5%);
   }
 
   /* Baker */
@@ -279,6 +271,25 @@ html {
     display: inline-block;
   }
 
+  /* Kaj */
+
+  /* Viktor */
+}
+
+@media (min-width: 1024px) {
+  html {
+    font-size: calc(1.5 * 62.5%);
+  }
+
+  /* Baker */
+
+  /* Henrik */
+
+  .nav-menu li {
+    flex: 1;
+    display: inline-block;
+  }
+
   .quiz-slider {
     position: absolute;
     top: 50%;
@@ -287,15 +298,6 @@ html {
     width: 80vw;
     height: 20rem;
     border: 2px solid var(--primary-border-color);
-
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
   }
 
   .quiz-slider-item {
@@ -319,19 +321,23 @@ html {
     user-select: none;
     /* Standard syntax */
 
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
+    .quiz-slider-item:first-of-type {
+      font-size: 6rem;
+      color: var(--hover-color);
+      cursor: pointer;
+      margin-left: 25%;
+    }
 
-  .quiz-slider-item:first-of-type {
-    font-size: 8rem;
-    color: var(--hover-color);
-    cursor: pointer;
-    margin-left: 25%;
-  }
+    .quiz-slider-item:first-of-type {
+      font-size: 8rem;
+      color: var(--hover-color);
+      cursor: pointer;
+      margin-left: 25%;
+    }
 
-  .quiz-slider-item:last-child {
-    margin-inline-end: 47%;
+    .quiz-slider-item:last-child {
+      margin-inline-end: 47%;
+    }
   }
 
   /* Kaj */

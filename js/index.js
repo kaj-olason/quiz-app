@@ -40,7 +40,7 @@ aboutMenuElement.addEventListener("click", (e) => {
 });
 
 /* Load function */
-
+let selectQuizActive = true;
 const quizListElement = document.getElementById("quiz-list-id");
 const quizSliderElement = document.getElementById("quiz-slider-id");
 quizListElement.classList.add("collapsed");
@@ -57,7 +57,7 @@ function loadQuizzes(elementObj, classNames) {
     quizElement.dataset.id = parseInt(key);
     quizElement.classList.add(classNames);
     quizElement.addEventListener("click", (e) => selectQuiz(quizElement));
-    quizElement.innerHTML = quiz.quizName;
+    quizElement.innerText = quiz.quizName;
     elementObj.appendChild(quizElement);
   }
 }
@@ -66,6 +66,10 @@ function selectQuiz(quiz) {
   currentQuiz = quizObject[quiz.dataset.id];
   quizSelectElement.classList.add("collapsed");
   quizRunElement.classList.remove("collapsed");
+
+  console.log(`Quiz ${quiz.dataset.id} selected`);
+  selectQuizActive = false;
+  // loadQuiz(currentQuiz);
   loadQuiz(currentQuiz);
 }
 
@@ -82,12 +86,14 @@ function mediaQueryEventHandler() {
       .getPropertyValue("width")
   );
 
-  if (width >= 1024) {
-    quizListElement.classList.add("collapsed");
-    quizSliderElement.classList.remove("collapsed");
-  } else {
-    quizListElement.classList.remove("collapsed");
-    quizSliderElement.classList.add("collapsed");
+  if (selectQuizActive) {
+    if (width >= 1024) {
+      quizListElement.classList.add("collapsed");
+      quizSliderElement.classList.remove("collapsed");
+    } else {
+      quizListElement.classList.remove("collapsed");
+      quizSliderElement.classList.add("collapsed");
+    }
   }
 }
 
@@ -116,8 +122,8 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
   const indexRight = Math.ceil(scrollPos);
   const indexLeftDiff = scrollPos - indexLeft;
   const indexRightDiff = indexRight - scrollPos;
-  const leftFontSize = 1 + 8 * (1 - indexLeftDiff);
-  const rightFontSize = 1 + 8 * (1 - indexRightDiff);
+  const leftFontSize = 1 + 5 * (1 - indexLeftDiff);
+  const rightFontSize = 1 + 5 * (1 - indexRightDiff);
 
   for (let i = 0; i <= quizSliderItemsElement.length - 1; i++) {
     quizSliderItemsElement[i].style.fontSize = `1rem`;
