@@ -110,6 +110,12 @@ html {
   display: none;
 }
 
+.welcome-msg {
+  width: fit-content;
+  margin: 2rem auto 0 auto;
+  font-size: 1.5rem;
+}
+
 /* Select list */
 
 .quiz-select {
@@ -243,6 +249,54 @@ html {
 }
 
 /* Viktor */
+
+.popup-container {
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.popup {
+  width: 25rem;
+  height: 15rem;
+  border: solid 2px var(--primary-border-color);
+  border-radius: 3px;
+  background-color: var(--primary-background-color);
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.input-name {
+  padding: 0.1rem;
+}
+
+.btn-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.popup-btn {
+  padding: 0rem 0.2rem 0rem 0.2rem;
+  font: var(--primary-font);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
 
 @media (min-width: 768px) {
   html {

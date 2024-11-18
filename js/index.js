@@ -339,6 +339,49 @@ const showResult = (resultObject) => {
 
 /* Viktor */
 
+const popupContainer = document.getElementById("popup-container-id");
+const inputName = document.getElementById("input-name-id");
+const submitBtn = document.getElementById("submit-btn-id");
+const anonymousBtn = document.getElementById("anonymous-btn-id");
+
+const welcomeMsg = document.getElementById("welcome-msg-id");
+const mainElement = document.querySelector("main");
+
+if (!localStorage.getItem("playerName")) {
+  
+  popupContainer.classList.toggle("collapsed");
+
+  submitBtn.addEventListener("click", () => {
+      
+      if (inputName.value === "") {
+
+        alert("Please enter a name");
+      
+      } else {
+
+          localStorage.setItem("playerName", inputName.value);
+          popupContainer.classList.toggle("collapsed");
+          const playerName = localStorage.getItem("playerName");
+
+          welcomeMsg.innerText = `Welcome, ${playerName}! Select a quiz and start playing!` 
+
+        }
+    });
+
+    anonymousBtn.addEventListener("click", () => {
+
+      popupContainer.classList.toggle("collapsed");
+
+      welcomeMsg.innerText = `Welcome! Select a quiz and start playing!`
+    
+    })
+
+} else {
+    const playerName = localStorage.getItem("playerName");
+    welcomeMsg.innerText = `Welcome back, ${playerName}! You know the drill, get ready!`
+}
+
+
 // const quizTimer = document.getElementById("quizTimer");
 
 // const startButton document.getElementById("idStartBtn");

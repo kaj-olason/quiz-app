@@ -25,7 +25,7 @@
     <title>Quiz App</title>
   </head>
 
-  <body>
+<body>
     <header>
       <nav class="nav-bar">
         <p class="heading">Quiz</p>
@@ -36,15 +36,26 @@
           <li><a id="nav-menu-about-id">About</a></li>
         </ul>
         <label id="hamburger-menu-id" class="hamburger-menu">
-          <img
-            class="icon__display--hamburger icon__size--hamburger icon__position--hamburger"
-            src="./svg/hamburger-menu.svg"
-            alt="Hamburger Menu Icon"
-          />
+          <img class="icon__display--hamburger icon__size--hamburger icon__position--hamburger"
+            src="./svg/hamburger-menu.svg" alt="Hamburger Menu Icon">
         </label>
       </nav>
     </header>
     <main>
+      <!-- Viktor (Name input) -->
+      <div id="popup-container-id" class="popup-container collapsed"> 
+        <aside id="popup-id" class="popup">
+          <p>Welcome, please enter your name</p>
+          <input id="input-name-id" class="input-name" type="text" placeholder="name">
+          <div class="btn-container">
+            <button id="submit-btn-id" class="popup-btn">Submit</button>
+            <button id="anonymous-btn-id" class="popup-btn">Remain anonymous</button>
+          </div>
+        </aside>
+      </div>
+
+      <section id="welcome-msg-id" class="welcome-msg"></section>
+
       <!-- Henrik (Select Quiz) -->
       <div id="quiz-select-id" class="quiz-select">
         <div id="quiz-list-id" class="quiz-list collapsed"></div>
@@ -67,5 +78,5 @@
       <p>Copyright &copy; 2024</p>
     </footer>
     <script type="module" src="./js/index.js"></script>
-  </body>
+ </body>
 </html>
