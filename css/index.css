@@ -261,10 +261,10 @@ html {
 }
 
 .popup {
-  width: 25rem;
+  width: 27rem;
   height: 15rem;
   border: solid 2px var(--primary-border-color);
-  border-radius: 3px;
+  border-radius: 4px;
   background-color: var(--primary-background-color);
   padding: 1rem;
   position: absolute;
@@ -276,13 +276,17 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
   font-size: 1.3rem;
   font-weight: 600;
 }
 
+.popup-header {
+  margin-top: 1rem;
+}
+
 .input-name {
-  padding: 0.1rem;
+  padding: 0.3rem;
 }
 
 .btn-container {
@@ -295,6 +299,11 @@ html {
   font: var(--primary-font);
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.popup-btn:hover {
+  /* background-color: var(--hover-color); */
+  cursor: pointer;
 }
 
 

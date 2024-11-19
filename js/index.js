@@ -66,7 +66,7 @@ function selectQuiz(quiz) {
   currentQuiz = quizObject[quiz.dataset.id];
   quizSelectElement.classList.add("collapsed");
   quizRunElement.classList.remove("collapsed");
-
+  welcomeMsg.classList.add("collapsed")
   console.log(`Quiz ${quiz.dataset.id} selected`);
   selectQuizActive = false;
   // loadQuiz(currentQuiz);
@@ -134,7 +134,7 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 
   quizSliderItemsElement[indexLeft].style.fontSize = `${leftFontSize}rem`;
   quizSliderItemsElement[indexRight].style.fontSize = `${rightFontSize}rem`;
-
+   
   quizSliderItemsElement[indexInFocus].style.cursor = "pointer";
   quizSliderItemsElement[indexInFocus].style.color = "#54C4F8";
   quizSliderItemsElement[indexInFocus].style.zIndex = "1";
@@ -378,7 +378,7 @@ if (!localStorage.getItem("playerName")) {
 
 } else {
     const playerName = localStorage.getItem("playerName");
-    welcomeMsg.innerText = `Welcome back, ${playerName}! You know the drill, get ready!`
+    welcomeMsg.innerText = `Welcome, ${playerName}! Back for more quiz-action?`
 }
 
 
