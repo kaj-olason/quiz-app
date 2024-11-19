@@ -352,6 +352,14 @@ html {
     width: 80vw;
     height: 20rem;
     border: 2px solid var(--primary-border-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
   }
 
   .quiz-slider-item {
@@ -375,12 +383,9 @@ html {
     user-select: none;
     /* Standard syntax */
 
-    .quiz-slider-item:first-of-type {
-      font-size: 6rem;
-      color: var(--hover-color);
-      cursor: pointer;
-      margin-left: 25%;
-    }
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 
     .quiz-slider-item:first-of-type {
       font-size: 8rem;
@@ -397,7 +402,7 @@ html {
   /* Kaj */
 
   /* Viktor */
-}
+
 
 @media (min-width: 1200px) {
   /* Baker */
