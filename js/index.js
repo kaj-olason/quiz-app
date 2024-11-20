@@ -339,6 +339,20 @@ const showResult = (resultObject) => {
   document.getElementById("result").innerText = `${resultObject.yourPoint} / ${resultObject.maxPoint}`;
 };
 
+const tryAgain = document.getElementById("tryAgain");
+const anotherQuiz =document.getElementById("anotherQuiz");
+
+tryAgain.addEventListener("click", (quiz) => {
+
+console.log("får ej till att knappen startar samma quiz");
+
+});
+
+anotherQuiz.addEventListener("click", () => {
+
+  location.reload();
+});
+
   
 /* Viktor */
 
