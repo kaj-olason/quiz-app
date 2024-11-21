@@ -18,8 +18,6 @@ const quizResultElement = document.getElementById("quiz-result");
 let currentQuiz = {};
 let currentAnswers = [];
 
-/* Baker */
-
 /* Henrik */
 
 /* Hamburger Menu */
@@ -67,7 +65,7 @@ function selectQuiz(quiz) {
   quizSelectElement.classList.add("collapsed");
   quizRunElement.classList.remove("collapsed");
 
-  console.log(`Quiz ${quiz.dataset.id} selected`);
+  // console.log(`Quiz ${quiz.dataset.id} selected`);
   selectQuizActive = false;
   // loadQuiz(currentQuiz);
   loadQuiz(currentQuiz);
@@ -225,7 +223,7 @@ function loadQuiz(quizObject) {
         }
       });
       quizResultObject.quizResult.push(obj);
-      console.log(quizResultObject);
+      // console.log(quizResultObject);
       currentIndex = ++currentIndex;
       questionContainer.style.left = "-" + currentIndex * 800 + "px";
     } else {
@@ -244,8 +242,8 @@ function loadQuiz(quizObject) {
           yourAnsware: "",
         };
 
-        console.log("Your result: ", quizResult);
-        console.log("Current index: ", currentIndex);
+        // console.log("Your result: ", quizResult);
+        // console.log("Current index: ", currentIndex);
 
         let checkRadio = document.querySelector(
           `input[name="${currentIndex}"]:checked`
@@ -254,9 +252,9 @@ function loadQuiz(quizObject) {
           let correctAnswareIndex =
             quizObject.questionsArray[currentIndex].correctIndexAnswer;
 
-          console.log(quizObject);
-          console.log(currentIndex);
-          console.log(obj);
+          // console.log(quizObject);
+          // console.log(currentIndex);
+          // console.log(obj);
           obj.quistion = quizObject.questionsArray[currentIndex].question;
 
           error.classList.remove("errorShow");
@@ -280,7 +278,7 @@ function loadQuiz(quizObject) {
           });
           quizResultObject.quizResult.push(obj);
           quizResultObject.yourPoint = quizResult;
-          console.log(quizResultObject);
+          // console.log(quizResultObject);
           showResult(quizResultObject);
         } else {
           error.classList.add("errorShow");
@@ -333,10 +331,29 @@ function loadQuiz(quizObject) {
   });
 }
 
+/* Baker */;
+
 const showResult = (resultObject) => {
-  console.log(resultObject);
+  document.getElementById("quiz-run").classList.toggle("collapsed");
+  document.getElementById("quiz-result").classList.toggle("collapsed");
+  document.getElementById("result").innerText = `${resultObject.yourPoint} / ${resultObject.maxPoint}`;
 };
 
+const tryAgain = document.getElementById("tryAgain");
+const anotherQuiz =document.getElementById("anotherQuiz");
+
+tryAgain.addEventListener("click", (quiz) => {
+
+console.log("får ej till att knappen startar samma quiz");
+
+});
+
+anotherQuiz.addEventListener("click", () => {
+
+  location.reload();
+});
+
+  
 /* Viktor */
 
 const popupContainer = document.getElementById("popup-container-id");
