@@ -18,8 +18,6 @@ const quizResultElement = document.getElementById("quiz-result");
 let currentQuiz = {};
 let currentAnswers = [];
 
-/* Baker */
-
 /* Henrik */
 
 /* Hamburger Menu */
@@ -67,7 +65,7 @@ function selectQuiz(quiz) {
   quizSelectElement.classList.add("collapsed");
   quizRunElement.classList.remove("collapsed");
 
-  console.log(`Quiz ${quiz.dataset.id} selected`);
+  // console.log(`Quiz ${quiz.dataset.id} selected`);
   selectQuizActive = false;
   // loadQuiz(currentQuiz);
   loadQuiz(currentQuiz);
@@ -569,9 +567,24 @@ function loadQuiz(quizObject) {
   });
 }
 
-const showResult = (resultObject) => {
-  console.log(resultObject);
+/* Baker */ const showResult = (resultObject) => {
+  document.getElementById("quiz-run").classList.toggle("collapsed");
+  document.getElementById("quiz-result").classList.toggle("collapsed");
+  document.getElementById(
+    "result"
+  ).innerText = `${resultObject.yourPoint} / ${resultObject.maxPoint}`;
 };
+
+const tryAgain = document.getElementById("tryAgain");
+const anotherQuiz = document.getElementById("anotherQuiz");
+
+tryAgain.addEventListener("click", (quiz) => {
+  console.log("får ej till att knappen startar samma quiz");
+});
+
+anotherQuiz.addEventListener("click", () => {
+  location.reload();
+});
 
 /* Viktor */
 

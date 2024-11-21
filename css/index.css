@@ -36,6 +36,60 @@ html {
 
 /* Baker */
 
+/* Result BOX */
+#quiz-result {
+  flex-direction: column;
+  justify-content:center;
+  justify-items: center;
+  align-items: center;
+  width: 550px;
+  margin: auto;
+  margin-top: 100px;
+  gap: 10px;
+  /* background-color: yellow; */
+  border-radius: 10px;
+  border:#000000 2px solid;
+
+h1 {  
+    font-size: 60px;
+    color: orange;
+  }
+  
+p {
+    font-size: 90px;
+    margin-bottom: 15px;
+}
+
+.resultBtns {
+  /* background-color: red; */
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 20px;
+  font-weight:600;
+  margin-bottom: 20px;
+  color: orange;
+}
+
+button{
+  background-color: white);
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  font-weight: 900;
+  border-radius: 10px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border: 2px solid #04AA6D;
+}
+
+button:hover {
+  background-color: rgb(0, 235, 156);
+  color: white;
+}
+}
+
 /* Henrik */
 
 /* Header */
@@ -352,6 +406,14 @@ html {
     width: 80vw;
     height: 20rem;
     border: 2px solid var(--primary-border-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
   }
 
   .quiz-slider-item {
@@ -375,12 +437,9 @@ html {
     user-select: none;
     /* Standard syntax */
 
-    .quiz-slider-item:first-of-type {
-      font-size: 6rem;
-      color: var(--hover-color);
-      cursor: pointer;
-      margin-left: 25%;
-    }
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
 
     .quiz-slider-item:first-of-type {
       font-size: 8rem;
@@ -397,7 +456,7 @@ html {
   /* Kaj */
 
   /* Viktor */
-}
+
 
 @media (min-width: 1200px) {
   /* Baker */
