@@ -141,6 +141,7 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 }
 
 /* Kaj */
+
 function loadQuiz(quizObject) {
   // Form
   let form = document.getElementById("quiz-form");
@@ -188,54 +189,238 @@ function loadQuiz(quizObject) {
     yourPoint: 0,
   };
 
-  btnNext.addEventListener("click", function (e) {
-    e.preventDefault();
+  // Timer
+  const timer = document.createElement("p");
+  timer.id = "quizTimer";
+  timer.classList.add("quiz-timer");
+  form.appendChild(timer);
 
-    let obj = {
-      quistion: "",
-      correctAnsware: "",
-      yourAnsware: "",
-    };
+  const quizTimer = document.getElementById("quizTimer");
 
-    let checkRadio = document.querySelector(
-      `input[name="${currentIndex}"]:checked`
-    );
+  const startButton = document.getElementById("idStartBtn");
 
-    if (checkRadio !== null) {
-      let correctAnswareIndex =
-        quizObject.questionsArray[currentIndex].correctIndexAnswer;
+  //startButton.addEventListener("click", startTimer);
 
-      obj.quistion = quizObject.questionsArray[currentIndex].question;
+  let timerCountSec = 0;
 
-      error.classList.remove("errorShow");
+  let timerInterval;
 
-      let inputs = document.querySelectorAll("input[type='radio']");
-      inputs.forEach(function (h) {
-        if (h.name == currentIndex && h.id == correctAnswareIndex) {
-          obj.correctAnsware = h.value;
-        }
-      });
+  function startTimer() {
+    // A Condition which prevents a new interval to be started if an interval is already ongoing
+    if (!timerInterval) {
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+  }
 
-      let checked = document.querySelectorAll("input[type='radio']:checked");
-      checked.forEach(function (cb) {
-        obj.yourAnsware = cb.value;
+  function pauseTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
 
-        if (cb.id == correctAnswareIndex) {
-          ++quizResult;
-        }
-      });
-      quizResultObject.quizResult.push(obj);
-      console.log(quizResultObject);
-      currentIndex = ++currentIndex;
-      questionContainer.style.left = "-" + currentIndex * 800 + "px";
+  function resetTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+
+    timerCountSec = 0;
+    // quizTimer.innerHTML = "0" + timerCountSec;
+  }
+
+  let firstTime = true;
+
+  startTimer();
+
+  function updateTimer() {
+    timerCountSec++;
+    console.log(currentIndex);
+    if (timerCountSec < 10) {
+      quizTimer.innerHTML = `Du har 0${timerCountSec} sekunder kvar av 10 att svara! `;
     } else {
-      error.classList.add("errorShow");
+      quizTimer.innerHTML = `Du har ${timerCountSec} sekunder kvar av 10 att svara! `;
     }
 
-    if (currentIndex >= maxIndex) {
-      btnNext.style.display = "none";
-      answareBtn.style.display = "inline-block";
-      answareBtn.addEventListener("click", (e) => {
+    //console.log(timerInterval);
+
+    //Made a condition to make timer start at 00 instead of 0
+
+    if (timerCountSec >= 10 || firstTime == true) {
+      let checkRadio = document.querySelector(
+        `input[name="${currentIndex}"]:checked`
+      );
+
+      if (firstTime == false) {
+        currentIndex = ++currentIndex;
+        if (currentIndex <= maxIndex) {
+          questionContainer.style.left = "-" + currentIndex * 800 + "px";
+        }
+      }
+
+      firstTime = false;
+
+      if (currentIndex <= maxIndex) {
+        resetTimer();
+        startTimer();
+      } else {
+        resetTimer();
+        pauseTimer();
+      }
+
+      if (currentIndex >= maxIndex) {
+        console.log("hej");
+
+        let obj = {
+          quistion: "",
+          correctAnsware: "",
+          yourAnsware: "",
+        };
+
+        obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+        let correctAnswareIndex =
+          quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+        let inputs = document.querySelectorAll("input[type='radio']");
+        inputs.forEach(function (h) {
+          if (h.name == currentIndex && h.id == correctAnswareIndex) {
+            obj.correctAnsware = h.value;
+          }
+        });
+
+        if (checkRadio !== null) {
+          error.classList.remove("errorShow");
+
+          let checked = document.querySelectorAll(
+            "input[type='radio']:checked"
+          );
+          checked.forEach(function (cb) {
+            obj.yourAnsware = cb.value;
+
+            if (cb.id == correctAnswareIndex) {
+              ++quizResult;
+            }
+          });
+        } else {
+        }
+
+        quizResultObject.quizResult.push(obj);
+        console.log(quizResultObject);
+
+        btnNext.style.display = "none";
+        answareBtn.style.display = "inline-block";
+        answareBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          console.log("Your result object: ", quizResultObject);
+          console.log("Your result: ", quizResult);
+          console.log("Current index: ", currentIndex);
+
+          /*
+          let obj = {
+            quistion: "",
+            correctAnsware: "",
+            yourAnsware: "",
+          };
+
+          console.log("Your result: ", quizResult);
+          console.log("Current index: ", currentIndex);
+
+          let checkRadio = document.querySelector(
+            `input[name="${currentIndex}"]:checked`
+          );
+          if (checkRadio !== null) {
+            let correctAnswareIndex =
+              quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+            console.log(quizObject);
+            console.log(currentIndex);
+            console.log(obj);
+            obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+            error.classList.remove("errorShow");
+
+            let inputs = document.querySelectorAll("input[type='radio']");
+            inputs.forEach(function (h) {
+              if (h.name == currentIndex && h.id == correctAnswareIndex) {
+                obj.correctAnsware = h.value;
+              }
+            });
+
+            let checked = document.querySelectorAll(
+              "input[type='radio']:checked"
+            );
+            checked.forEach(function (cb) {
+              obj.yourAnsware = cb.value;
+
+              if (cb.id == correctAnswareIndex) {
+                ++quizResult;
+              }
+            });
+            quizResultObject.quizResult.push(obj);
+            quizResultObject.yourPoint = quizResult;
+            console.log(quizResultObject);
+            showResult(quizResultObject);
+          } else {
+            error.classList.add("errorShow");
+          }
+          */
+        });
+      } else {
+        console.log("hej");
+        let obj = {
+          quistion: "",
+          correctAnsware: "",
+          yourAnsware: "",
+        };
+
+        obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+        let correctAnswareIndex =
+          quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+        let inputs = document.querySelectorAll("input[type='radio']");
+        inputs.forEach(function (h) {
+          if (h.name == currentIndex && h.id == correctAnswareIndex) {
+            obj.correctAnsware = h.value;
+          }
+        });
+
+        if (checkRadio !== null) {
+          error.classList.remove("errorShow");
+
+          let inputs = document.querySelectorAll("input[type='radio']");
+          inputs.forEach(function (h) {
+            if (h.name == currentIndex && h.id == correctAnswareIndex) {
+              obj.correctAnsware = h.value;
+            }
+          });
+
+          let checked = document.querySelectorAll(
+            "input[type='radio']:checked"
+          );
+          checked.forEach(function (cb) {
+            obj.yourAnsware = cb.value;
+
+            if (cb.id == correctAnswareIndex) {
+              ++quizResult;
+            }
+          });
+          quizResultObject.quizResult.push(obj);
+
+          // currentIndex = ++currentIndex;
+          // questionContainer.style.left = "-" + currentIndex * 800 + "px";
+        } else {
+          // currentIndex = ++currentIndex;
+          //  questionContainer.style.left = "-" + currentIndex * 800 + "px";
+        }
+
+        quizResultObject.quizResult.push(obj);
+
+        btnNext.style.display = "inline-block";
+        answareBtn.style.display = "none";
+        console.log("Max result: ", maxIndex);
+        console.log("Current index: ", currentIndex);
+      }
+
+      btnNext.addEventListener("click", function (e) {
         e.preventDefault();
 
         let obj = {
@@ -244,19 +429,14 @@ function loadQuiz(quizObject) {
           yourAnsware: "",
         };
 
-        console.log("Your result: ", quizResult);
-        console.log("Current index: ", currentIndex);
-
         let checkRadio = document.querySelector(
           `input[name="${currentIndex}"]:checked`
         );
+
         if (checkRadio !== null) {
           let correctAnswareIndex =
             quizObject.questionsArray[currentIndex].correctIndexAnswer;
 
-          console.log(quizObject);
-          console.log(currentIndex);
-          console.log(obj);
           obj.quistion = quizObject.questionsArray[currentIndex].question;
 
           error.classList.remove("errorShow");
@@ -279,18 +459,74 @@ function loadQuiz(quizObject) {
             }
           });
           quizResultObject.quizResult.push(obj);
-          quizResultObject.yourPoint = quizResult;
           console.log(quizResultObject);
-          showResult(quizResultObject);
+          currentIndex = ++currentIndex;
+          questionContainer.style.left = "-" + currentIndex * 800 + "px";
         } else {
           error.classList.add("errorShow");
         }
+
+        if (currentIndex >= maxIndex) {
+          btnNext.style.display = "none";
+          answareBtn.style.display = "inline-block";
+          answareBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let obj = {
+              quistion: "",
+              correctAnsware: "",
+              yourAnsware: "",
+            };
+
+            console.log("Your result: ", quizResult);
+            console.log("Current index: ", currentIndex);
+
+            let checkRadio = document.querySelector(
+              `input[name="${currentIndex}"]:checked`
+            );
+            if (checkRadio !== null) {
+              let correctAnswareIndex =
+                quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+              console.log(quizObject);
+              console.log(currentIndex);
+              console.log(obj);
+              obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+              error.classList.remove("errorShow");
+
+              let inputs = document.querySelectorAll("input[type='radio']");
+              inputs.forEach(function (h) {
+                if (h.name == currentIndex && h.id == correctAnswareIndex) {
+                  obj.correctAnsware = h.value;
+                }
+              });
+
+              let checked = document.querySelectorAll(
+                "input[type='radio']:checked"
+              );
+              checked.forEach(function (cb) {
+                obj.yourAnsware = cb.value;
+
+                if (cb.id == correctAnswareIndex) {
+                  ++quizResult;
+                }
+              });
+              quizResultObject.quizResult.push(obj);
+              quizResultObject.yourPoint = quizResult;
+              console.log(quizResultObject);
+              showResult(quizResultObject);
+            } else {
+              error.classList.add("errorShow");
+            }
+          });
+        } else {
+          btnNext.style.display = "inline-block";
+          answareBtn.style.display = "none";
+        }
       });
-    } else {
-      btnNext.style.display = "inline-block";
-      answareBtn.style.display = "none";
     }
-  });
+  }
 
   currentQuiz.questionsArray.forEach((quizItem, questionIndex) => {
     //Fieldset
@@ -348,81 +584,26 @@ const welcomeMsg = document.getElementById("welcome-msg-id");
 const mainElement = document.querySelector("main");
 
 if (!localStorage.getItem("playerName")) {
-  
   popupContainer.classList.toggle("collapsed");
 
   submitBtn.addEventListener("click", () => {
-      
-      if (inputName.value === "") {
-
-        alert("Please enter a name");
-      
-      } else {
-
-          localStorage.setItem("playerName", inputName.value);
-          popupContainer.classList.toggle("collapsed");
-          const playerName = localStorage.getItem("playerName");
-
-          welcomeMsg.innerText = `Welcome, ${playerName}! Select a quiz and start playing!` 
-
-        }
-    });
-
-    anonymousBtn.addEventListener("click", () => {
-
+    if (inputName.value === "") {
+      alert("Please enter a name");
+    } else {
+      localStorage.setItem("playerName", inputName.value);
       popupContainer.classList.toggle("collapsed");
+      const playerName = localStorage.getItem("playerName");
 
-      welcomeMsg.innerText = `Welcome! Select a quiz and start playing!`
-    
-    })
+      welcomeMsg.innerText = `Welcome, ${playerName}! Select a quiz and start playing!`;
+    }
+  });
 
+  anonymousBtn.addEventListener("click", () => {
+    popupContainer.classList.toggle("collapsed");
+
+    welcomeMsg.innerText = `Welcome! Select a quiz and start playing!`;
+  });
 } else {
-    const playerName = localStorage.getItem("playerName");
-    welcomeMsg.innerText = `Welcome back, ${playerName}! You know the drill, get ready!`
-}
-
-
-// const quizTimer = document.getElementById("quizTimer");
-
-// const startButton document.getElementById("idStartBtn");
-
-// startButton.addEventListener("click", startTimer);
-
-let timerCountSec = 0;
-
-let timerInterval;
-
-function startTimer() {
-  // A Condition which prevents a new interval to be started if an interval is already ongoing
-  if (!timerInterval) {
-    timerInterval = setInterval(updateTimer, 1000);
-  }
-}
-
-function updateTimer() {
-  timerCountSec++;
-
-  //Made a condition to make timer start at 00 instead of 0
-  if (timerCountSec < 10) {
-    quizTimer.innerHTML = "0" + timerCountSec;
-  } else {
-    quizTimer.innerHTML = timerCountSec;
-  }
-
-  if (timerCountSec === currentQuiz.timeLimitSec) {
-    pauseTimer();
-  }
-}
-
-function pauseTimer() {
-  clearInterval(timerInterval);
-  timerInterval = null;
-}
-
-function resetTimer() {
-  clearInterval(timerInterval);
-  timerInterval = null;
-
-  timerCountSec = 0;
-  quizTimer.innerHTML = "0" + timerCountSec;
+  const playerName = localStorage.getItem("playerName");
+  welcomeMsg.innerText = `Welcome back, ${playerName}! You know the drill, get ready!`;
 }
