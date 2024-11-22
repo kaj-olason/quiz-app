@@ -67,6 +67,19 @@ function loadQuizzes(elementObj, classNames) {
       paginationDot.addEventListener("click", () => {
         scrollEventHandler(paginationDot.id);
       });
+      const dotImg = document.createElement("img");
+      dotImg.classList.add("dot-img");
+      console.log(quizObject[key].quizName);
+
+      if (quiz.quizName === "Djur Quiz") {
+        dotImg.src = "img/dot-img-animal.svg";
+      } else if (quiz.quizName ==="Data Quiz") {
+        dotImg.src = "img/dot-img-computer.svg";
+      } else if (quiz.quizName === "Geografi Quiz") {
+        dotImg.src = "img/dot-img-geography.svg";
+      }
+
+      paginationDot.appendChild(dotImg);
       sliderPaginationElement.appendChild(paginationDot);
     }
   }
@@ -165,31 +178,16 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
   quizSliderItemsElement[indexInFocus].style.cursor = "pointer";
   quizSliderItemsElement[indexInFocus].style.color = "#54C4F8";
   quizSliderItemsElement[indexInFocus].style.zIndex = "1";
-
-  const quizSliderItemsElementWidth = parseInt(
-    window.getComputedStyle(quizSliderItemsElement[0]).getPropertyValue("width")
-  );
-  const paginationDots = document.querySelectorAll(".pagination-dot"); 
-  if (quizSliderElement.scrollLeft < quizSliderItemsElementWidth) {
-    paginationDots[0].classList.add("active-dot");
-    paginationDots[1].classList.remove("active-dot");
-    paginationDots[2].classList.remove("active-dot");
-  } else if (quizSliderElement.scrollLeft < quizSliderItemsElementWidth*2) {
-    paginationDots[0].classList.remove("active-dot");
-    paginationDots[1].classList.add("active-dot");
-    paginationDots[2].classList.remove("active-dot");
-  } else {
-    paginationDots[0].classList.remove("active-dot");
-    paginationDots[1].classList.remove("active-dot");
-    paginationDots[2].classList.add("active-dot");
-  }
-}
-
-// function changeDisplayedElement(dotId) {
   
-//   dotId = parseInt(dotId);
-//   scrollEventHandler(dotId);
-// }
+  const paginationDots = document.querySelectorAll(".pagination-dot"); 
+  paginationDots.forEach((dot, index) => {
+    if (index === indexInFocus) {
+      dot.classList.add("active-dot");
+    } else {
+      dot.classList.remove("active-dot");
+    }
+  })
+}
 
 /* Kaj */
 function loadQuiz(quizObject) {
