@@ -26,10 +26,6 @@
 
 /* Common Classes */
 
-.collapsed {
-  display: none;
-}
-
 html {
   font-size: 62.5%;
   font-family: var(--primary-font);
@@ -511,4 +507,8 @@ html {
   /* Kaj */
 
   /* Viktor */
+}
+
+.collapsed {
+  display: none;
 }
