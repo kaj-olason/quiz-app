@@ -41,8 +41,10 @@ aboutMenuElement.addEventListener("click", (e) => {
 let selectQuizActive = true;
 const quizListElement = document.getElementById("quiz-list-id");
 const quizSliderElement = document.getElementById("quiz-slider-id");
+const sliderPaginationElement = document.getElementById("slider-pagination-id");
 quizListElement.classList.add("collapsed");
 quizSliderElement.classList.add("collapsed");
+sliderPaginationElement.classList.add("collapsed");
 
 loadQuizzes(quizListElement, "quiz-list-item");
 loadQuizzes(quizSliderElement, "quiz-slider-item");
@@ -57,6 +59,29 @@ function loadQuizzes(elementObj, classNames) {
     quizElement.addEventListener("click", (e) => selectQuiz(quizElement));
     quizElement.innerText = quiz.quizName;
     elementObj.appendChild(quizElement);
+
+    if (elementObj === quizSliderElement) {
+      const paginationDot = document.createElement("div");
+      paginationDot.id = key;
+      paginationDot.classList.add("pagination-dot");
+      paginationDot.addEventListener("click", () => {
+        scrollEventHandler(paginationDot.id);
+      });
+      const dotImg = document.createElement("img");
+      dotImg.classList.add("dot-img");
+      console.log(quizObject[key].quizName);
+
+      if (quiz.quizName === "Djur Quiz") {
+        dotImg.src = "img/dot-img-animal.svg";
+      } else if (quiz.quizName ==="Data Quiz") {
+        dotImg.src = "img/dot-img-computer.svg";
+      } else if (quiz.quizName === "Geografi Quiz") {
+        dotImg.src = "img/dot-img-geography.svg";
+      }
+
+      paginationDot.appendChild(dotImg);
+      sliderPaginationElement.appendChild(paginationDot);
+    }
   }
 }
 
@@ -88,26 +113,43 @@ function mediaQueryEventHandler() {
     if (width >= 1024) {
       quizListElement.classList.add("collapsed");
       quizSliderElement.classList.remove("collapsed");
+      sliderPaginationElement.classList.remove("collapsed");
     } else {
       quizListElement.classList.remove("collapsed");
       quizSliderElement.classList.add("collapsed");
+      sliderPaginationElement.classList.add("collapsed");
     }
   }
 }
 
 /* Scroll event handler */
 
-quizSliderElement.addEventListener("scroll", (e) => scrollEventHandler(e));
+quizSliderElement.addEventListener("scroll", () => scrollEventHandler());
 
-function scrollEventHandler(e) {
+function scrollEventHandler(indexPos) {
+  indexPos = parseInt(indexPos);
   const quizSliderItemsElement = Array.from(
     document.getElementsByClassName("quiz-slider-item")
   );
   const quizSliderItemsElementWidth = parseInt(
     window.getComputedStyle(quizSliderItemsElement[0]).getPropertyValue("width")
   );
-  const scrollPos = quizSliderElement.scrollLeft / quizSliderItemsElementWidth;
-  scaleSliderItems(quizSliderItemsElement, scrollPos);
+  
+  if (!indexPos && indexPos !== 0) {
+    const scrollPos = quizSliderElement.scrollLeft / quizSliderItemsElementWidth;
+    scaleSliderItems(quizSliderItemsElement, scrollPos);
+  
+  } else {
+      if (indexPos == 0) {
+        quizSliderElement.scrollLeft = 0;  
+
+      } else if (indexPos === 1) {
+        quizSliderElement.scrollLeft = quizSliderItemsElementWidth*1.5;
+  
+      } else {
+        quizSliderElement.scrollLeft = quizSliderItemsElementWidth*2;
+      }
+  }
 }
 
 function scaleSliderItems(quizSliderItemsElement, scrollPos) {
@@ -136,6 +178,15 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
   quizSliderItemsElement[indexInFocus].style.cursor = "pointer";
   quizSliderItemsElement[indexInFocus].style.color = "#54C4F8";
   quizSliderItemsElement[indexInFocus].style.zIndex = "1";
+  
+  const paginationDots = document.querySelectorAll(".pagination-dot"); 
+  paginationDots.forEach((dot, index) => {
+    if (index === indexInFocus) {
+      dot.classList.add("active-dot");
+    } else {
+      dot.classList.remove("active-dot");
+    }
+  })
 }
 
 /* Kaj */
