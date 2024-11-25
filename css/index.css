@@ -39,7 +39,7 @@ html {
 /* Result BOX */
 #quiz-result {
   flex-direction: column;
-  justify-content:center;
+  justify-content: center;
   justify-items: center;
   align-items: center;
   width: 550px;
@@ -48,46 +48,46 @@ html {
   gap: 10px;
   /* background-color: yellow; */
   border-radius: 10px;
-  border:#000000 2px solid;
+  border: #000000 2px solid;
 
-h1 {  
+  h1 {
     font-size: 60px;
     color: orange;
   }
-  
-p {
+
+  p {
     font-size: 90px;
     margin-bottom: 15px;
-}
+  }
 
-.resultBtns {
-  /* background-color: red; */
-  font-size: 20px;
-  width: 100%;
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  gap: 20px;
-  font-weight:600;
-  margin-bottom: 20px;
-  color: orange;
-}
+  .resultBtns {
+    /* background-color: red; */
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: orange;
+  }
 
-button{
-  background-color: white);
-  color: rgb(0, 0, 0);
-  padding: 10px 15px;
-  font-weight: 900;
-  border-radius: 10px;
-  cursor: pointer;
-  transition-duration: 0.4s;
-  border: 2px solid #04AA6D;
-}
+  button {
+    background-color: white;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px;
+    font-weight: 900;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    border: 2px solid #04aa6d;
+  }
 
-button:hover {
-  background-color: rgb(0, 235, 156);
-  color: white;
-}
+  button:hover {
+    background-color: rgb(0, 235, 156);
+    color: white;
+  }
 }
 
 /* Henrik */
@@ -235,16 +235,40 @@ button:hover {
   margin: auto;
   overflow: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .quiz-title {
+  width: fit-content;
+  margin: 2rem auto 0 auto;
+  font-size: 1.5rem;
   text-align: center;
-  margin-top: 100px;
-  font-size: 24px;
+  margin-top: 50px;
+}
+
+.current-question {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-top: 85px;
+  font-size: 20px;
 }
 
 .quiz-title-theme {
   color: #54c4f8;
+}
+
+.quiz-timer {
+  color: red;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.quiz-questions {
+  color: #333;
+  font-size: 24px;
+  text-transform: uppercase;
 }
 
 .btnContainer {
@@ -254,13 +278,33 @@ button:hover {
   z-index: 999;
 }
 .btn {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  font-weight: 900;
+  border-radius: 10px;
   cursor: pointer;
-  z-index: 999;
+  transition-duration: 0.4s;
+  border: 2px solid #04aa6d;
+}
+.btn:hover {
+  background-color: rgb(0, 235, 156);
+  color: white;
 }
 .answareBtn {
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  font-weight: 900;
+  border-radius: 10px;
   cursor: pointer;
-  z-index: 999;
+  transition-duration: 0.4s;
+  border: 2px solid #04aa6d;
   display: none;
+}
+.answareBtn:hover {
+  background-color: rgb(0, 235, 156);
+  color: white;
 }
 .questionContainer {
   position: absolute;
@@ -275,10 +319,15 @@ button:hover {
 .error {
   color: #000000;
   display: none;
+  margin: auto;
 }
 
 .errorShow {
   display: block;
+  position: absolute;
+  bottom: 60px;
+  right: 0px;
+  color: red;
 }
 
 .quizFieldset {
@@ -307,7 +356,7 @@ button:hover {
 .popup-container {
   min-width: 100vw;
   min-height: 100vh;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   top: 0;
   left: 0;
@@ -350,7 +399,6 @@ button:hover {
   font-size: 1.2rem;
   font-weight: 500;
 }
-
 
 @media (min-width: 768px) {
   html {
@@ -441,22 +489,21 @@ button:hover {
     backface-visibility: hidden;
   }
 
-    .quiz-slider-item:first-of-type {
-      font-size: 8rem;
-      color: var(--hover-color);
-      cursor: pointer;
-      margin-left: 25%;
-    }
-
-    .quiz-slider-item:last-child {
-      margin-inline-end: 47%;
-    }
+  .quiz-slider-item:first-of-type {
+    font-size: 8rem;
+    color: var(--hover-color);
+    cursor: pointer;
+    margin-left: 25%;
   }
 
-  /* Kaj */
+  .quiz-slider-item:last-child {
+    margin-inline-end: 47%;
+  }
+}
 
-  /* Viktor */
+/* Kaj */
 
+/* Viktor */
 
 @media (min-width: 1200px) {
   /* Baker */

@@ -141,6 +141,9 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 /* Kaj */
 
 function loadQuiz(quizObject) {
+  // Welkome message
+  const welcomeMessage = document.getElementById("welcome-msg-id");
+  welcomeMessage.style.display = "none";
   // Form
   let form = document.getElementById("quiz-form");
   form.classList.add("quiz-form");
@@ -162,6 +165,10 @@ function loadQuiz(quizObject) {
   error.appendChild(errorMessage);
   error.classList.add("error");
   form.appendChild(error);
+
+  const hideError = () => {
+    error.classList.remove("errorShow");
+  };
 
   //Buttons
   let btnNext = document.getElementById("btnNext");
@@ -199,7 +206,7 @@ function loadQuiz(quizObject) {
 
   //startButton.addEventListener("click", startTimer);
 
-  let timerCountSec = 0;
+  let timerCountSec = 11;
 
   let timerInterval;
 
@@ -218,8 +225,7 @@ function loadQuiz(quizObject) {
   function resetTimer() {
     clearInterval(timerInterval);
     timerInterval = null;
-
-    timerCountSec = 0;
+    timerCountSec = 11;
     // quizTimer.innerHTML = "0" + timerCountSec;
   }
 
@@ -227,20 +233,30 @@ function loadQuiz(quizObject) {
 
   startTimer();
 
+  const currentQuestion = document.createElement("p");
+  currentQuestion.classList.add("current-question");
+
+  form.appendChild(currentQuestion);
+
   function updateTimer() {
-    timerCountSec++;
+    // Current question
+    currentQuestion.innerHTML = `Fråga ${currentIndex + 1} av ${maxIndex}`;
+    timerCountSec--;
     console.log(currentIndex);
     if (timerCountSec < 10) {
-      quizTimer.innerHTML = `Du har 0${timerCountSec} sekunder kvar av 10 att svara! `;
+      quizTimer.innerHTML = `Du har 0${timerCountSec} sekunder kvar att svara! `;
     } else {
-      quizTimer.innerHTML = `Du har ${timerCountSec} sekunder kvar av 10 att svara! `;
+      quizTimer.innerHTML = `Du har ${timerCountSec} sekunder kvar att svara! `;
     }
 
+    if (timerCountSec < 5) {
+      quizTimer.innerHTML = `MEN va långsam du är! <br> Nu är det bara ${timerCountSec} sekunder kvar! `;
+    }
     //console.log(timerInterval);
 
     //Made a condition to make timer start at 00 instead of 0
 
-    if (timerCountSec >= 10 || firstTime == true) {
+    if (timerCountSec <= 0 || firstTime == true) {
       let checkRadio = document.querySelector(
         `input[name="${currentIndex}"]:checked`
       );
@@ -304,6 +320,7 @@ function loadQuiz(quizObject) {
 
         btnNext.style.display = "none";
         answareBtn.style.display = "inline-block";
+        showResult(quizResultObject);
         answareBtn.addEventListener("click", (e) => {
           e.preventDefault();
 
@@ -311,7 +328,6 @@ function loadQuiz(quizObject) {
           console.log("Your result: ", quizResult);
           console.log("Current index: ", currentIndex);
 
-          /*
           let obj = {
             quistion: "",
             correctAnsware: "",
@@ -328,9 +344,6 @@ function loadQuiz(quizObject) {
             let correctAnswareIndex =
               quizObject.questionsArray[currentIndex].correctIndexAnswer;
 
-            console.log(quizObject);
-            console.log(currentIndex);
-            console.log(obj);
             obj.quistion = quizObject.questionsArray[currentIndex].question;
 
             error.classList.remove("errorShow");
@@ -353,14 +366,16 @@ function loadQuiz(quizObject) {
               }
             });
             quizResultObject.quizResult.push(obj);
-            quizResultObject.yourPoint = quizResult;
             console.log(quizResultObject);
-            showResult(quizResultObject);
+            currentIndex = ++currentIndex;
+            questionContainer.style.left = "-" + currentIndex * 800 + "px";
           } else {
             error.classList.add("errorShow");
           }
-          */
         });
+        if (timerCountSec <= 0 && currentIndex == maxIndex) {
+          showResult(quizResultObject);
+        }
       } else {
         console.log("hej");
         let obj = {
@@ -420,6 +435,9 @@ function loadQuiz(quizObject) {
 
       btnNext.addEventListener("click", function (e) {
         e.preventDefault();
+
+        resetTimer();
+        startTimer();
 
         let obj = {
           quistion: "",
@@ -523,6 +541,14 @@ function loadQuiz(quizObject) {
           answareBtn.style.display = "none";
         }
       });
+      if (timerCountSec <= 0 && currentIndex == maxIndex) {
+        showResult(quizResultObject);
+      }
+    }
+    console.log("hej");
+    console.log(timerCountSec);
+    if (timerCountSec <= 0 && currentIndex == maxIndex) {
+      showResult(quizResultObject);
     }
   }
 
@@ -533,10 +559,11 @@ function loadQuiz(quizObject) {
     questionContainer.appendChild(fieldset);
 
     //The Quiestion text
-    const questionNode = document.createElement("p");
-    const questionText = document.createTextNode(quizItem.question);
-    questionNode.appendChild(questionText);
-    fieldset.appendChild(questionNode);
+    const questionText = document.createElement("p");
+    const questionNode = document.createTextNode(quizItem.question);
+    questionText.classList.add("quiz-questions");
+    questionText.appendChild(questionNode);
+    fieldset.appendChild(questionText);
 
     //Inputs
     const inputs = document.createElement("div");
@@ -551,6 +578,9 @@ function loadQuiz(quizObject) {
 
       //Input
       const input = document.createElement("INPUT");
+      input.addEventListener("click", () => {
+        hideError();
+      });
       input.type = "radio";
       input.id = answareIndex;
       input.name = questionIndex;
@@ -565,6 +595,11 @@ function loadQuiz(quizObject) {
       inputContainer.appendChild(label);
     });
   });
+  console.log("haha");
+  if (timerCountSec <= 0 && currentIndex == maxIndex) {
+    console.log("haha");
+    showResult(quizResultObject);
+  }
 }
 
 /* Baker */ const showResult = (resultObject) => {
