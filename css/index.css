@@ -25,9 +25,6 @@
 }
 
 /* Common Classes */
-.collapsed {
-  display: none;
-}
 
 html {
   font-size: 62.5%;
@@ -48,14 +45,16 @@ html {
   gap: 10px;
   /* background-color: yellow; */
   border-radius: 10px;
-  border: #000000 2px solid;
+  border:#000000 2px solid;
+}
 
-  h1 {
+#quiz-result h1 {  
     font-size: 60px;
     color: orange;
-  }
+}
+  
+#quiz-result p {
 
-  p {
     font-size: 90px;
     margin-bottom: 15px;
   }
@@ -73,22 +72,23 @@ html {
     color: orange;
   }
 
-  button {
-    background-color: white;
-    color: rgb(0, 0, 0);
-    padding: 10px 15px;
-    font-weight: 900;
-    border-radius: 10px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-    border: 2px solid #04aa6d;
-  }
-
-  button:hover {
-    background-color: rgb(0, 235, 156);
-    color: white;
-  }
+#quiz-result button{
+  background-color: white;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  font-weight: 900;
+  border-radius: 10px;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  border: 2px solid #04AA6D;
 }
+
+#quiz-result button:hover {
+  background-color: rgb(0, 235, 156);
+  color: white;
+}
+
+
 
 /* Henrik */
 
@@ -452,8 +452,10 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 80vw;
+    max-width: 60rem;
     height: 20rem;
-    border: 2px solid var(--primary-border-color);
+    border: 2px solid var(--hover-color);
+    border-radius: 5px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -462,6 +464,17 @@ html {
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .quiz-slider::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .quiz-slider {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 
   .quiz-slider-item {
@@ -473,6 +486,7 @@ html {
     color: var(--primary-color);
     background-color: rgba(0, 0, 0, 0);
     cursor: default;
+    scrollbar-width: 200px;
     scroll-snap-align: center;
     scroll-behavior: smooth;
     flex-shrink: 0;
@@ -501,9 +515,38 @@ html {
   }
 }
 
-/* Kaj */
+  /* Viktor */
+    .slider-pagination-container {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 25rem;
+      margin-left: 45%;
+    }
 
-/* Viktor */
+    .pagination-dot {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      border: solid 1px black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--primary-background-color);
+    }
+
+    .pagination-dot:hover {
+      background-color: rgb(200, 200, 200);
+      cursor: pointer;
+    }
+
+    .active-dot {
+      background-color: var(--hover-color);
+    }
+
+    .dot-img {
+      width: 1.5rem;
+    }
+
 
 @media (min-width: 1200px) {
   /* Baker */
@@ -513,4 +556,8 @@ html {
   /* Kaj */
 
   /* Viktor */
+}
+
+.collapsed {
+  display: none;
 }
