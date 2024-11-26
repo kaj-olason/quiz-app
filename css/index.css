@@ -43,7 +43,6 @@ html {
   margin: auto;
   margin-top: 100px;
   gap: 10px;
-  /* background-color: yellow; */
   border-radius: 10px;
   border:#000000 2px solid;
 }
@@ -59,18 +58,18 @@ html {
     margin-bottom: 15px;
   }
 
-  .resultBtns {
-    /* background-color: red; */
-    font-size: 20px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: orange;
-  }
+.resultBtns {
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 20px;
+  font-weight:600;
+  margin-bottom: 20px;
+  color: orange;
+}
+
 
 #quiz-result button{
   background-color: white;
@@ -101,8 +100,8 @@ html {
   top: 0;
   left: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 1rem 2rem;
   background-color: var(--primary-background-color);
   border-bottom: 1px solid var(--primary-border-color);
@@ -110,58 +109,12 @@ html {
 }
 
 .heading {
-  height: 4rem;
+  width: fit-content;
   display: flex;
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 4rem;
   font-weight: 700;
   color: var(--primary-color);
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--primary-color);
-}
-
-.nav-menu {
-  width: 80vw;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.nav-menu li {
-  flex: 1 1 100%;
-  text-align: center;
-}
-
-.nav-menu li a {
-  width: 100%;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--primary-color);
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.nav-menu li a:hover {
-  color: var(--hover-color);
-}
-
-.hamburger-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 4rem;
-  height: 4rem;
-  cursor: pointer;
-}
-
-.nav-menu-collapsed {
-  display: none;
 }
 
 .welcome-msg {
@@ -219,6 +172,7 @@ html {
 
 .footer {
   width: 100vw;
+  height: 5rem;
   max-width: 100%;
   position: fixed;
   bottom: 0;
