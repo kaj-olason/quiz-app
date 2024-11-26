@@ -56,10 +56,13 @@ function loadQuizzes(elementObj, classNames) {
 
       if (quiz.quizName === "Djur Quiz") {
         dotImg.src = "img/dot-img-animal.svg";
+        dotImg.alt = "Animal icon";
       } else if (quiz.quizName ==="Data Quiz") {
         dotImg.src = "img/dot-img-computer.svg";
+        dotImg.alt = "Computer icon";
       } else if (quiz.quizName === "Geografi Quiz") {
         dotImg.src = "img/dot-img-geography.svg";
+        dotImg.alt = "Geography icon"
       }
 
       paginationDot.appendChild(dotImg);
