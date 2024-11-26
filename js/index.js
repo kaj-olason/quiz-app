@@ -89,6 +89,7 @@ function selectQuiz(quiz) {
   currentQuiz = quizObject[quiz.dataset.id];
   quizSelectElement.classList.add("collapsed");
   quizRunElement.classList.remove("collapsed");
+  welcomeMsg.classList.add("collapsed")
 
   // console.log(`Quiz ${quiz.dataset.id} selected`);
   selectQuizActive = false;
@@ -390,14 +391,7 @@ const showResult = (resultObject) => {
   document.getElementById("result").innerText = `${resultObject.yourPoint} / ${resultObject.maxPoint}`;
 };
 
-const tryAgain = document.getElementById("tryAgain");
 const anotherQuiz =document.getElementById("anotherQuiz");
-
-tryAgain.addEventListener("click", (quiz) => {
-
-console.log("får ej till att knappen startar samma quiz");
-
-});
 
 anotherQuiz.addEventListener("click", () => {
 
