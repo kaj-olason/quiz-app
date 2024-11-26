@@ -191,7 +191,11 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 }
 
 /* Kaj */
+
 function loadQuiz(quizObject) {
+  // Welkome message
+  const welcomeMessage = document.getElementById("welcome-msg-id");
+  welcomeMessage.style.display = "none";
   // Form
   let form = document.getElementById("quiz-form");
   form.classList.add("quiz-form");
@@ -213,6 +217,10 @@ function loadQuiz(quizObject) {
   error.appendChild(errorMessage);
   error.classList.add("error");
   form.appendChild(error);
+
+  const hideError = () => {
+    error.classList.remove("errorShow");
+  };
 
   //Buttons
   let btnNext = document.getElementById("btnNext");
@@ -238,55 +246,92 @@ function loadQuiz(quizObject) {
     yourPoint: 0,
   };
 
-  btnNext.addEventListener("click", function (e) {
-    e.preventDefault();
+  // Timer
+  const timer = document.createElement("p");
+  timer.id = "quizTimer";
+  timer.classList.add("quiz-timer");
+  form.appendChild(timer);
 
-    let obj = {
-      quistion: "",
-      correctAnsware: "",
-      yourAnsware: "",
-    };
+  const quizTimer = document.getElementById("quizTimer");
 
-    let checkRadio = document.querySelector(
-      `input[name="${currentIndex}"]:checked`
-    );
+  const startButton = document.getElementById("idStartBtn");
 
-    if (checkRadio !== null) {
-      let correctAnswareIndex =
-        quizObject.questionsArray[currentIndex].correctIndexAnswer;
+  //startButton.addEventListener("click", startTimer);
 
-      obj.quistion = quizObject.questionsArray[currentIndex].question;
+  let timerCountSec = 11;
 
-      error.classList.remove("errorShow");
+  let timerInterval;
 
-      let inputs = document.querySelectorAll("input[type='radio']");
-      inputs.forEach(function (h) {
-        if (h.name == currentIndex && h.id == correctAnswareIndex) {
-          obj.correctAnsware = h.value;
-        }
-      });
+  function startTimer() {
+    // A Condition which prevents a new interval to be started if an interval is already ongoing
+    if (!timerInterval) {
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+  }
 
-      let checked = document.querySelectorAll("input[type='radio']:checked");
-      checked.forEach(function (cb) {
-        obj.yourAnsware = cb.value;
+  function pauseTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
 
-        if (cb.id == correctAnswareIndex) {
-          ++quizResult;
-        }
-      });
-      quizResultObject.quizResult.push(obj);
-      // console.log(quizResultObject);
-      currentIndex = ++currentIndex;
-      questionContainer.style.left = "-" + currentIndex * 800 + "px";
+  function resetTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerCountSec = 11;
+    // quizTimer.innerHTML = "0" + timerCountSec;
+  }
+
+  let firstTime = true;
+
+  startTimer();
+
+  const currentQuestion = document.createElement("p");
+  currentQuestion.classList.add("current-question");
+
+  form.appendChild(currentQuestion);
+
+  function updateTimer() {
+    // Current question
+    currentQuestion.innerHTML = `Fråga ${currentIndex + 1} av ${maxIndex}`;
+    timerCountSec--;
+    console.log(currentIndex);
+    if (timerCountSec < 10) {
+      quizTimer.innerHTML = `Du har 0${timerCountSec} sekunder kvar att svara! `;
     } else {
-      error.classList.add("errorShow");
+      quizTimer.innerHTML = `Du har ${timerCountSec} sekunder kvar att svara! `;
     }
 
-    if (currentIndex >= maxIndex) {
-      btnNext.style.display = "none";
-      answareBtn.style.display = "inline-block";
-      answareBtn.addEventListener("click", (e) => {
-        e.preventDefault();
+    if (timerCountSec < 5) {
+      quizTimer.innerHTML = `MEN va långsam du är! <br> Nu är det bara ${timerCountSec} sekunder kvar! `;
+    }
+    //console.log(timerInterval);
+
+    //Made a condition to make timer start at 00 instead of 0
+
+    if (timerCountSec <= 0 || firstTime == true) {
+      let checkRadio = document.querySelector(
+        `input[name="${currentIndex}"]:checked`
+      );
+
+      if (firstTime == false) {
+        currentIndex = ++currentIndex;
+        if (currentIndex <= maxIndex) {
+          questionContainer.style.left = "-" + currentIndex * 800 + "px";
+        }
+      }
+
+      firstTime = false;
+
+      if (currentIndex <= maxIndex) {
+        resetTimer();
+        startTimer();
+      } else {
+        resetTimer();
+        pauseTimer();
+      }
+
+      if (currentIndex >= maxIndex) {
+        console.log("hej");
 
         let obj = {
           quistion: "",
@@ -294,19 +339,172 @@ function loadQuiz(quizObject) {
           yourAnsware: "",
         };
 
-        // console.log("Your result: ", quizResult);
-        // console.log("Current index: ", currentIndex);
+        obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+        let correctAnswareIndex =
+          quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+        let inputs = document.querySelectorAll("input[type='radio']");
+        inputs.forEach(function (h) {
+          if (h.name == currentIndex && h.id == correctAnswareIndex) {
+            obj.correctAnsware = h.value;
+          }
+        });
+
+        if (checkRadio !== null) {
+          error.classList.remove("errorShow");
+
+          let checked = document.querySelectorAll(
+            "input[type='radio']:checked"
+          );
+          checked.forEach(function (cb) {
+            obj.yourAnsware = cb.value;
+
+            if (cb.id == correctAnswareIndex) {
+              ++quizResult;
+            }
+          });
+        } else {
+        }
+
+        quizResultObject.quizResult.push(obj);
+        console.log(quizResultObject);
+
+        btnNext.style.display = "none";
+        answareBtn.style.display = "inline-block";
+        showResult(quizResultObject);
+        answareBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          console.log("Your result object: ", quizResultObject);
+          console.log("Your result: ", quizResult);
+          console.log("Current index: ", currentIndex);
+
+          let obj = {
+            quistion: "",
+            correctAnsware: "",
+            yourAnsware: "",
+          };
+
+          console.log("Your result: ", quizResult);
+          console.log("Current index: ", currentIndex);
+
+          let checkRadio = document.querySelector(
+            `input[name="${currentIndex}"]:checked`
+          );
+          if (checkRadio !== null) {
+            let correctAnswareIndex =
+              quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+            obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+            error.classList.remove("errorShow");
+
+            let inputs = document.querySelectorAll("input[type='radio']");
+            inputs.forEach(function (h) {
+              if (h.name == currentIndex && h.id == correctAnswareIndex) {
+                obj.correctAnsware = h.value;
+              }
+            });
+
+            let checked = document.querySelectorAll(
+              "input[type='radio']:checked"
+            );
+            checked.forEach(function (cb) {
+              obj.yourAnsware = cb.value;
+
+              if (cb.id == correctAnswareIndex) {
+                ++quizResult;
+              }
+            });
+            quizResultObject.quizResult.push(obj);
+            console.log(quizResultObject);
+            currentIndex = ++currentIndex;
+            questionContainer.style.left = "-" + currentIndex * 800 + "px";
+          } else {
+            error.classList.add("errorShow");
+          }
+        });
+        if (timerCountSec <= 0 && currentIndex == maxIndex) {
+          showResult(quizResultObject);
+        }
+      } else {
+        console.log("hej");
+        let obj = {
+          quistion: "",
+          correctAnsware: "",
+          yourAnsware: "",
+        };
+
+        obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+        let correctAnswareIndex =
+          quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+        let inputs = document.querySelectorAll("input[type='radio']");
+        inputs.forEach(function (h) {
+          if (h.name == currentIndex && h.id == correctAnswareIndex) {
+            obj.correctAnsware = h.value;
+          }
+        });
+
+        if (checkRadio !== null) {
+          error.classList.remove("errorShow");
+
+          let inputs = document.querySelectorAll("input[type='radio']");
+          inputs.forEach(function (h) {
+            if (h.name == currentIndex && h.id == correctAnswareIndex) {
+              obj.correctAnsware = h.value;
+            }
+          });
+
+          let checked = document.querySelectorAll(
+            "input[type='radio']:checked"
+          );
+          checked.forEach(function (cb) {
+            obj.yourAnsware = cb.value;
+
+            if (cb.id == correctAnswareIndex) {
+              ++quizResult;
+            }
+          });
+          quizResultObject.quizResult.push(obj);
+
+          // currentIndex = ++currentIndex;
+          // questionContainer.style.left = "-" + currentIndex * 800 + "px";
+        } else {
+          // currentIndex = ++currentIndex;
+          //  questionContainer.style.left = "-" + currentIndex * 800 + "px";
+        }
+
+        quizResultObject.quizResult.push(obj);
+
+        btnNext.style.display = "inline-block";
+        answareBtn.style.display = "none";
+        console.log("Max result: ", maxIndex);
+        console.log("Current index: ", currentIndex);
+      }
+
+      btnNext.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        resetTimer();
+        startTimer();
+
+        let obj = {
+          quistion: "",
+          correctAnsware: "",
+          yourAnsware: "",
+        };
 
         let checkRadio = document.querySelector(
           `input[name="${currentIndex}"]:checked`
         );
+
         if (checkRadio !== null) {
           let correctAnswareIndex =
             quizObject.questionsArray[currentIndex].correctIndexAnswer;
 
-          // console.log(quizObject);
-          // console.log(currentIndex);
-          // console.log(obj);
           obj.quistion = quizObject.questionsArray[currentIndex].question;
 
           error.classList.remove("errorShow");
@@ -329,18 +527,82 @@ function loadQuiz(quizObject) {
             }
           });
           quizResultObject.quizResult.push(obj);
-          quizResultObject.yourPoint = quizResult;
-          // console.log(quizResultObject);
-          showResult(quizResultObject);
+          console.log(quizResultObject);
+          currentIndex = ++currentIndex;
+          questionContainer.style.left = "-" + currentIndex * 800 + "px";
         } else {
           error.classList.add("errorShow");
         }
+
+        if (currentIndex >= maxIndex) {
+          btnNext.style.display = "none";
+          answareBtn.style.display = "inline-block";
+          answareBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            let obj = {
+              quistion: "",
+              correctAnsware: "",
+              yourAnsware: "",
+            };
+
+            console.log("Your result: ", quizResult);
+            console.log("Current index: ", currentIndex);
+
+            let checkRadio = document.querySelector(
+              `input[name="${currentIndex}"]:checked`
+            );
+            if (checkRadio !== null) {
+              let correctAnswareIndex =
+                quizObject.questionsArray[currentIndex].correctIndexAnswer;
+
+              console.log(quizObject);
+              console.log(currentIndex);
+              console.log(obj);
+              obj.quistion = quizObject.questionsArray[currentIndex].question;
+
+              error.classList.remove("errorShow");
+
+              let inputs = document.querySelectorAll("input[type='radio']");
+              inputs.forEach(function (h) {
+                if (h.name == currentIndex && h.id == correctAnswareIndex) {
+                  obj.correctAnsware = h.value;
+                }
+              });
+
+              let checked = document.querySelectorAll(
+                "input[type='radio']:checked"
+              );
+              checked.forEach(function (cb) {
+                obj.yourAnsware = cb.value;
+
+                if (cb.id == correctAnswareIndex) {
+                  ++quizResult;
+                }
+              });
+              quizResultObject.quizResult.push(obj);
+              quizResultObject.yourPoint = quizResult;
+              console.log(quizResultObject);
+              showResult(quizResultObject);
+            } else {
+              error.classList.add("errorShow");
+            }
+          });
+        } else {
+          btnNext.style.display = "inline-block";
+          answareBtn.style.display = "none";
+        }
       });
-    } else {
-      btnNext.style.display = "inline-block";
-      answareBtn.style.display = "none";
+      if (timerCountSec <= 0 && currentIndex == maxIndex) {
+        showResult(quizResultObject);
+      }
     }
-  });
+    console.log("hej");
+    console.log(timerCountSec);
+    if (timerCountSec <= 0 && currentIndex == maxIndex) {
+      showResult(quizResultObject);
+    }
+  }
 
   currentQuiz.questionsArray.forEach((quizItem, questionIndex) => {
     //Fieldset
@@ -349,10 +611,11 @@ function loadQuiz(quizObject) {
     questionContainer.appendChild(fieldset);
 
     //The Quiestion text
-    const questionNode = document.createElement("p");
-    const questionText = document.createTextNode(quizItem.question);
-    questionNode.appendChild(questionText);
-    fieldset.appendChild(questionNode);
+    const questionText = document.createElement("p");
+    const questionNode = document.createTextNode(quizItem.question);
+    questionText.classList.add("quiz-questions");
+    questionText.appendChild(questionNode);
+    fieldset.appendChild(questionText);
 
     //Inputs
     const inputs = document.createElement("div");
@@ -367,6 +630,9 @@ function loadQuiz(quizObject) {
 
       //Input
       const input = document.createElement("INPUT");
+      input.addEventListener("click", () => {
+        hideError();
+      });
       input.type = "radio";
       input.id = answareIndex;
       input.name = questionIndex;
@@ -381,24 +647,34 @@ function loadQuiz(quizObject) {
       inputContainer.appendChild(label);
     });
   });
+  console.log("haha");
+  if (timerCountSec <= 0 && currentIndex == maxIndex) {
+    console.log("haha");
+    showResult(quizResultObject);
+  }
 }
 
-/* Baker */;
-
-const showResult = (resultObject) => {
+/* Baker */ const showResult = (resultObject) => {
   document.getElementById("quiz-run").classList.toggle("collapsed");
   document.getElementById("quiz-result").classList.toggle("collapsed");
-  document.getElementById("result").innerText = `${resultObject.yourPoint} / ${resultObject.maxPoint}`;
+  document.getElementById(
+    "result"
+  ).innerText = `${resultObject.yourPoint} / ${resultObject.maxPoint}`;
 };
 
-const anotherQuiz =document.getElementById("anotherQuiz");
+feature/run-quiz
+const tryAgain = document.getElementById("tryAgain");
+const anotherQuiz = document.getElementById("anotherQuiz");
+
+tryAgain.addEventListener("click", (quiz) => {
+  console.log("får ej till att knappen startar samma quiz");
+});
+
 
 anotherQuiz.addEventListener("click", () => {
-
   location.reload();
 });
 
-  
 /* Viktor */
 
 const popupContainer = document.getElementById("popup-container-id");
@@ -410,81 +686,26 @@ const welcomeMsg = document.getElementById("welcome-msg-id");
 const mainElement = document.querySelector("main");
 
 if (!localStorage.getItem("playerName")) {
-  
   popupContainer.classList.toggle("collapsed");
 
   submitBtn.addEventListener("click", () => {
-      
-      if (inputName.value === "") {
-
-        alert("Please enter a name");
-      
-      } else {
-
-          localStorage.setItem("playerName", inputName.value);
-          popupContainer.classList.toggle("collapsed");
-          const playerName = localStorage.getItem("playerName");
-
-          welcomeMsg.innerText = `Welcome, ${playerName}! Select a quiz and start playing!` 
-
-        }
-    });
-
-    anonymousBtn.addEventListener("click", () => {
-
+    if (inputName.value === "") {
+      alert("Please enter a name");
+    } else {
+      localStorage.setItem("playerName", inputName.value);
       popupContainer.classList.toggle("collapsed");
+      const playerName = localStorage.getItem("playerName");
 
-      welcomeMsg.innerText = `Welcome! Select a quiz and start playing!`
-    
-    })
+      welcomeMsg.innerText = `Welcome, ${playerName}! Select a quiz and start playing!`;
+    }
+  });
 
+  anonymousBtn.addEventListener("click", () => {
+    popupContainer.classList.toggle("collapsed");
+
+    welcomeMsg.innerText = `Welcome! Select a quiz and start playing!`;
+  });
 } else {
-    const playerName = localStorage.getItem("playerName");
-    welcomeMsg.innerText = `Welcome back, ${playerName}! You know the drill, get ready!`
-}
-
-
-// const quizTimer = document.getElementById("quizTimer");
-
-// const startButton document.getElementById("idStartBtn");
-
-// startButton.addEventListener("click", startTimer);
-
-let timerCountSec = 0;
-
-let timerInterval;
-
-function startTimer() {
-  // A Condition which prevents a new interval to be started if an interval is already ongoing
-  if (!timerInterval) {
-    timerInterval = setInterval(updateTimer, 1000);
-  }
-}
-
-function updateTimer() {
-  timerCountSec++;
-
-  //Made a condition to make timer start at 00 instead of 0
-  if (timerCountSec < 10) {
-    quizTimer.innerHTML = "0" + timerCountSec;
-  } else {
-    quizTimer.innerHTML = timerCountSec;
-  }
-
-  if (timerCountSec === currentQuiz.timeLimitSec) {
-    pauseTimer();
-  }
-}
-
-function pauseTimer() {
-  clearInterval(timerInterval);
-  timerInterval = null;
-}
-
-function resetTimer() {
-  clearInterval(timerInterval);
-  timerInterval = null;
-
-  timerCountSec = 0;
-  quizTimer.innerHTML = "0" + timerCountSec;
+  const playerName = localStorage.getItem("playerName");
+  welcomeMsg.innerText = `Welcome back, ${playerName}! You know the drill, get ready!`;
 }
