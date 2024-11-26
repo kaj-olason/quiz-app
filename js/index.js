@@ -141,6 +141,8 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 /* Kaj */
 
 function loadQuiz(quizObject) {
+  var w = window.innerWidth;
+  console.log(w);
   // Welkome message
   const welcomeMessage = document.getElementById("welcome-msg-id");
   welcomeMessage.style.display = "none";
@@ -240,7 +242,7 @@ function loadQuiz(quizObject) {
 
   function updateTimer() {
     // Current question
-    currentQuestion.innerHTML = `Fråga ${currentIndex + 1} av ${maxIndex}`;
+    currentQuestion.innerHTML = `Fråga ${currentIndex + 1} av ${maxIndex + 1}`;
     timerCountSec--;
     console.log(currentIndex);
     if (timerCountSec < 10) {
@@ -280,6 +282,7 @@ function loadQuiz(quizObject) {
 
       if (currentIndex >= maxIndex) {
         console.log("hej");
+        showResult(quizResultObject);
 
         let obj = {
           quistion: "",
@@ -298,7 +301,7 @@ function loadQuiz(quizObject) {
             obj.correctAnsware = h.value;
           }
         });
-
+        console.log("hej");
         if (checkRadio !== null) {
           error.classList.remove("errorShow");
 
@@ -320,7 +323,7 @@ function loadQuiz(quizObject) {
 
         btnNext.style.display = "none";
         answareBtn.style.display = "inline-block";
-        showResult(quizResultObject);
+
         answareBtn.addEventListener("click", (e) => {
           e.preventDefault();
 
@@ -373,7 +376,8 @@ function loadQuiz(quizObject) {
             error.classList.add("errorShow");
           }
         });
-        if (timerCountSec <= 0 && currentIndex == maxIndex) {
+        console.log("hej");
+        if (timerCountSec <= 1 && currentIndex == maxIndex + 1) {
           showResult(quizResultObject);
         }
       } else {
@@ -477,7 +481,11 @@ function loadQuiz(quizObject) {
           quizResultObject.quizResult.push(obj);
           console.log(quizResultObject);
           currentIndex = ++currentIndex;
-          questionContainer.style.left = "-" + currentIndex * 800 + "px";
+          if (w > 450) {
+            questionContainer.style.left = "-" + currentIndex * 800 + "px";
+          } else {
+            questionContainer.style.left = "-" + currentIndex * 400 + "px";
+          }
         } else {
           error.classList.add("errorShow");
         }
@@ -540,6 +548,11 @@ function loadQuiz(quizObject) {
           btnNext.style.display = "inline-block";
           answareBtn.style.display = "none";
         }
+        console.log(currentIndex);
+        console.log(currentIndex);
+        if (timerCountSec <= 1 && currentIndex == maxIndex) {
+          showResult(quizResultObject);
+        }
       });
       if (timerCountSec <= 0 && currentIndex == maxIndex) {
         showResult(quizResultObject);
@@ -596,7 +609,7 @@ function loadQuiz(quizObject) {
     });
   });
   console.log("haha");
-  if (timerCountSec <= 0 && currentIndex == maxIndex) {
+  if (timerCountSec <= 1 && currentIndex == maxIndex) {
     console.log("haha");
     showResult(quizResultObject);
   }
