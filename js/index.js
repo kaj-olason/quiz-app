@@ -193,9 +193,7 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 /* Kaj */
 
 function loadQuiz(quizObject) {
-  // Welkome message
-  const welcomeMessage = document.getElementById("welcome-msg-id");
-  welcomeMessage.style.display = "none";
+
   // Form
   let form = document.getElementById("quiz-form");
   form.classList.add("quiz-form");
@@ -662,14 +660,7 @@ function loadQuiz(quizObject) {
   ).innerText = `${resultObject.yourPoint} / ${resultObject.maxPoint}`;
 };
 
-feature/run-quiz
-const tryAgain = document.getElementById("tryAgain");
 const anotherQuiz = document.getElementById("anotherQuiz");
-
-tryAgain.addEventListener("click", (quiz) => {
-  console.log("får ej till att knappen startar samma quiz");
-});
-
 
 anotherQuiz.addEventListener("click", () => {
   location.reload();
