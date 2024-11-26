@@ -184,7 +184,7 @@ html {
 /* Kaj */
 
 .quiz-form {
-  width: 800px;
+  width: 400px;
   height: 500px;
   margin: auto;
   overflow: hidden;
@@ -286,9 +286,8 @@ html {
 
 .quizFieldset {
   border: none;
-  width: 800px;
+  width: 400px;
   height: 500px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -382,6 +381,13 @@ html {
   }
 
   /* Kaj */
+  .quiz-form {
+    width: 800px;
+  }
+
+  .quizFieldset {
+    width: 800px;
+  }
 
   /* Viktor */
 }
