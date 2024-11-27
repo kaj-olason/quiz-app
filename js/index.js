@@ -174,7 +174,9 @@ function scaleSliderItems(quizSliderItemsElement, scrollPos) {
 /* Kaj */
 
 function loadQuiz(quizObject) {
+  //Check the width for responsive programatly
   var w = window.innerWidth;
+
   // Form
   let form = document.getElementById("quiz-form");
   form.classList.add("quiz-form");
@@ -212,9 +214,10 @@ function loadQuiz(quizObject) {
   buttonContainer.appendChild(answareBtn);
 
   let currentIndex = 0;
+  let currentBtnIndex = 0;
   let quizResult = 0;
 
-  let maxIndex = quizObject.questionsArray.length - 1;
+  let maxIndex = quizObject.questionsArray.length;
   let maxPoint = quizObject.questionsArray.length;
 
   let quizResultObject = {
@@ -234,8 +237,6 @@ function loadQuiz(quizObject) {
   const quizTimer = document.getElementById("quizTimer");
 
   const startButton = document.getElementById("idStartBtn");
-
-  //startButton.addEventListener("click", startTimer);
 
   let timerCountSec = 11;
 
@@ -257,7 +258,6 @@ function loadQuiz(quizObject) {
     clearInterval(timerInterval);
     timerInterval = null;
     timerCountSec = 11;
-    // quizTimer.innerHTML = "0" + timerCountSec;
   }
 
   let firstTime = true;
@@ -271,9 +271,9 @@ function loadQuiz(quizObject) {
 
   function updateTimer() {
     // Current question
-    currentQuestion.innerHTML = `Fråga ${currentIndex + 1} av ${maxIndex + 1}`;
+    currentQuestion.innerHTML = `Fråga ${currentIndex + 1} av ${maxIndex}`;
     timerCountSec--;
-    console.log(currentIndex);
+
     if (timerCountSec < 10) {
       quizTimer.innerHTML = `Du har 0${timerCountSec} sekunder kvar att svara! `;
     } else {
@@ -283,9 +283,6 @@ function loadQuiz(quizObject) {
     if (timerCountSec < 5) {
       quizTimer.innerHTML = `MEN va långsam du är! <br> Nu är det bara ${timerCountSec} sekunder kvar! `;
     }
-    //console.log(timerInterval);
-
-    //Made a condition to make timer start at 00 instead of 0
 
     if (timerCountSec <= 0 || firstTime == true) {
       let checkRadio = document.querySelector(
@@ -295,13 +292,17 @@ function loadQuiz(quizObject) {
       if (firstTime == false) {
         currentIndex = ++currentIndex;
         if (currentIndex <= maxIndex) {
-          questionContainer.style.left = "-" + currentIndex * 800 + "px";
+          if ((w = 400)) {
+            questionContainer.style.left = "-" + currentIndex * 400 + "px";
+          } else {
+            questionContainer.style.left = "-" + currentIndex * 800 + "px";
+          }
         }
       }
 
       firstTime = false;
 
-      if (currentIndex <= maxIndex) {
+      if (currentIndex < maxIndex) {
         resetTimer();
         startTimer();
       } else {
@@ -309,28 +310,25 @@ function loadQuiz(quizObject) {
         pauseTimer();
       }
 
-      if (currentIndex >= maxIndex) {
-        console.log("hej");
-        showResult(quizResultObject);
-
+      if (!(currentIndex + 1 < maxIndex)) {
         let obj = {
           quistion: "",
           correctAnsware: "",
           yourAnsware: "",
         };
 
-        obj.quistion = quizObject.questionsArray[currentIndex].question;
+        // obj.quistion = quizObject.questionsArray[currentIndex].question;
 
-        let correctAnswareIndex =
-          quizObject.questionsArray[currentIndex].correctIndexAnswer;
+        // let correctAnswareIndex =
+        //  quizObject.questionsArray[currentIndex].correctIndexAnswer;
 
-        let inputs = document.querySelectorAll("input[type='radio']");
-        inputs.forEach(function (h) {
-          if (h.name == currentIndex && h.id == correctAnswareIndex) {
-            obj.correctAnsware = h.value;
-          }
-        });
-        console.log("hej");
+        // let inputs = document.querySelectorAll("input[type='radio']");
+        // inputs.forEach(function (h) {
+        //   if (h.name == currentIndex && h.id == correctAnswareIndex) {
+        //    obj.correctAnsware = h.value;
+        //  }
+        //  });
+
         if (checkRadio !== null) {
           error.classList.remove("errorShow");
 
@@ -348,26 +346,24 @@ function loadQuiz(quizObject) {
         }
 
         quizResultObject.quizResult.push(obj);
-        console.log(quizResultObject);
 
         btnNext.style.display = "none";
         answareBtn.style.display = "inline-block";
 
+        if (currentIndex >= maxIndex) {
+          showResult(quizResultObject);
+          resetTimer();
+          pauseTimer();
+        }
+
         answareBtn.addEventListener("click", (e) => {
           e.preventDefault();
-
-          console.log("Your result object: ", quizResultObject);
-          console.log("Your result: ", quizResult);
-          console.log("Current index: ", currentIndex);
 
           let obj = {
             quistion: "",
             correctAnsware: "",
             yourAnsware: "",
           };
-
-          console.log("Your result: ", quizResult);
-          console.log("Current index: ", currentIndex);
 
           let checkRadio = document.querySelector(
             `input[name="${currentIndex}"]:checked`
@@ -384,6 +380,7 @@ function loadQuiz(quizObject) {
             inputs.forEach(function (h) {
               if (h.name == currentIndex && h.id == correctAnswareIndex) {
                 obj.correctAnsware = h.value;
+                console.log("jaja");
               }
             });
 
@@ -405,12 +402,11 @@ function loadQuiz(quizObject) {
             error.classList.add("errorShow");
           }
         });
-        console.log("hej");
+
         if (timerCountSec <= 1 && currentIndex == maxIndex + 1) {
           showResult(quizResultObject);
         }
       } else {
-        console.log("hej");
         let obj = {
           quistion: "",
           correctAnsware: "",
@@ -450,27 +446,24 @@ function loadQuiz(quizObject) {
             }
           });
           quizResultObject.quizResult.push(obj);
-
-          // currentIndex = ++currentIndex;
-          // questionContainer.style.left = "-" + currentIndex * 800 + "px";
-        } else {
-          // currentIndex = ++currentIndex;
-          //  questionContainer.style.left = "-" + currentIndex * 800 + "px";
         }
 
         quizResultObject.quizResult.push(obj);
 
         btnNext.style.display = "inline-block";
         answareBtn.style.display = "none";
-        console.log("Max result: ", maxIndex);
-        console.log("Current index: ", currentIndex);
       }
 
       btnNext.addEventListener("click", function (e) {
         e.preventDefault();
 
-        resetTimer();
-        startTimer();
+        if (currentBtnIndex < maxIndex) {
+          resetTimer();
+          startTimer();
+        } else {
+          resetTimer();
+          pauseTimer();
+        }
 
         let obj = {
           quistion: "",
@@ -484,15 +477,15 @@ function loadQuiz(quizObject) {
 
         if (checkRadio !== null) {
           let correctAnswareIndex =
-            quizObject.questionsArray[currentIndex].correctIndexAnswer;
+            quizObject.questionsArray[currentBtnIndex].correctIndexAnswer;
 
-          obj.quistion = quizObject.questionsArray[currentIndex].question;
+          obj.quistion = quizObject.questionsArray[currentBtnIndex].question;
 
           error.classList.remove("errorShow");
 
           let inputs = document.querySelectorAll("input[type='radio']");
           inputs.forEach(function (h) {
-            if (h.name == currentIndex && h.id == correctAnswareIndex) {
+            if (h.name == currentBtnIndex && h.id == correctAnswareIndex) {
               obj.correctAnsware = h.value;
             }
           });
@@ -500,26 +493,30 @@ function loadQuiz(quizObject) {
           let checked = document.querySelectorAll(
             "input[type='radio']:checked"
           );
-          checked.forEach(function (cb) {
-            obj.yourAnsware = cb.value;
+          if (currentBtnIndex + 1 < maxIndex) {
+            checked.forEach(function (cb) {
+              obj.yourAnsware = cb.value;
 
-            if (cb.id == correctAnswareIndex) {
-              ++quizResult;
-            }
-          });
+              if (cb.id == correctAnswareIndex) {
+                ++quizResult;
+              }
+            });
+          }
           quizResultObject.quizResult.push(obj);
-          console.log(quizResultObject);
-          currentIndex = ++currentIndex;
-          if (w > 450) {
-            questionContainer.style.left = "-" + currentIndex * 800 + "px";
-          } else {
-            questionContainer.style.left = "-" + currentIndex * 400 + "px";
+
+          if (currentBtnIndex <= maxIndex) {
+            currentBtnIndex = ++currentIndex;
+            if (w > 450) {
+              questionContainer.style.left = "-" + currentIndex * 800 + "px";
+            } else {
+              questionContainer.style.left = "-" + currentIndex * 400 + "px";
+            }
           }
         } else {
           error.classList.add("errorShow");
         }
 
-        if (currentIndex >= maxIndex) {
+        if (currentBtnIndex + 1 >= maxIndex) {
           btnNext.style.display = "none";
           answareBtn.style.display = "inline-block";
           answareBtn.addEventListener("click", (e) => {
@@ -531,26 +528,21 @@ function loadQuiz(quizObject) {
               yourAnsware: "",
             };
 
-            console.log("Your result: ", quizResult);
-            console.log("Current index: ", currentIndex);
-
             let checkRadio = document.querySelector(
-              `input[name="${currentIndex}"]:checked`
+              `input[name="${currentBtnIndex}"]:checked`
             );
             if (checkRadio !== null) {
               let correctAnswareIndex =
-                quizObject.questionsArray[currentIndex].correctIndexAnswer;
+                quizObject.questionsArray[currentBtnIndex].correctIndexAnswer;
 
-              console.log(quizObject);
-              console.log(currentIndex);
-              console.log(obj);
-              obj.quistion = quizObject.questionsArray[currentIndex].question;
+              obj.quistion =
+                quizObject.questionsArray[currentBtnIndex].question;
 
               error.classList.remove("errorShow");
 
               let inputs = document.querySelectorAll("input[type='radio']");
               inputs.forEach(function (h) {
-                if (h.name == currentIndex && h.id == correctAnswareIndex) {
+                if (h.name == currentBtnIndex && h.id == correctAnswareIndex) {
                   obj.correctAnsware = h.value;
                 }
               });
@@ -565,9 +557,11 @@ function loadQuiz(quizObject) {
                   ++quizResult;
                 }
               });
+
+              quizResult = quizResult - 1;
               quizResultObject.quizResult.push(obj);
               quizResultObject.yourPoint = quizResult;
-              console.log(quizResultObject);
+
               showResult(quizResultObject);
             } else {
               error.classList.add("errorShow");
@@ -577,8 +571,7 @@ function loadQuiz(quizObject) {
           btnNext.style.display = "inline-block";
           answareBtn.style.display = "none";
         }
-        console.log(currentIndex);
-        console.log(currentIndex);
+
         if (timerCountSec <= 1 && currentIndex == maxIndex) {
           showResult(quizResultObject);
         }
@@ -587,8 +580,7 @@ function loadQuiz(quizObject) {
         showResult(quizResultObject);
       }
     }
-    console.log("hej");
-    console.log(timerCountSec);
+
     if (timerCountSec <= 0 && currentIndex == maxIndex) {
       showResult(quizResultObject);
     }
@@ -637,9 +629,8 @@ function loadQuiz(quizObject) {
       inputContainer.appendChild(label);
     });
   });
-  console.log("haha");
+
   if (timerCountSec <= 1 && currentIndex == maxIndex) {
-    console.log("haha");
     showResult(quizResultObject);
   }
 }
