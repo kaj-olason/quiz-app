@@ -295,7 +295,7 @@ function loadQuiz(quizObject) {
       if (firstTime == false) {
         currentIndex = ++currentIndex;
         if (currentIndex <= maxIndex) {
-          if ((w = 400)) {
+          if ((w < 768)) {
             questionContainer.style.left = "-" + currentIndex * 400 + "px";
           } else {
             questionContainer.style.left = "-" + currentIndex * 800 + "px";
@@ -509,7 +509,7 @@ function loadQuiz(quizObject) {
 
           if (currentBtnIndex <= maxIndex) {
             currentBtnIndex = ++currentIndex;
-            if (w > 450) {
+            if (w >= 768) {
               questionContainer.style.left = "-" + currentIndex * 800 + "px";
             } else {
               questionContainer.style.left = "-" + currentIndex * 400 + "px";
@@ -564,7 +564,7 @@ function loadQuiz(quizObject) {
               quizResult = quizResult - 1;
               quizResultObject.quizResult.push(obj);
               quizResultObject.yourPoint = quizResult;
-
+              resetTimer()
               showResult(quizResultObject);
             } else {
               error.classList.add("errorShow");
@@ -576,15 +576,18 @@ function loadQuiz(quizObject) {
         }
 
         if (timerCountSec <= 1 && currentIndex == maxIndex) {
+          resetTimer()
           showResult(quizResultObject);
         }
       });
       if (timerCountSec <= 0 && currentIndex == maxIndex) {
+        resetTimer()
         showResult(quizResultObject);
       }
     }
 
     if (timerCountSec <= 0 && currentIndex == maxIndex) {
+      resetTimer()
       showResult(quizResultObject);
     }
   }
@@ -633,9 +636,9 @@ function loadQuiz(quizObject) {
     });
   });
 
-  if (timerCountSec <= 1 && currentIndex == maxIndex) {
-    showResult(quizResultObject);
-  }
+  // if (timerCountSec <= 1 && currentIndex == maxIndex) {
+  //   showResult(quizResultObject);
+  // }
 }
 
 /* Baker */ const showResult = (resultObject) => {
